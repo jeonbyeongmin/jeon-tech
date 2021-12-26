@@ -81,7 +81,7 @@ const ModeButton = styled(GatsbyImage)`
 
 const IconPosition = styled.div`
   position: fixed;
-  top: 20px;
+  top: 30px;
   right: 0px;
 `
 
