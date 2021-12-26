@@ -8,8 +8,7 @@
 - Typescript는 더 열심히 찾아봐야겠다..
 - 정적 사이트이기도 하고 볼륨이 크지도 않으니 천천히 익숙해지는 것에 집중해야겠다.
 
-
-<img width="1536" alt="스크린샷 2021-12-26 22 48 42" src="https://user-images.githubusercontent.com/28756358/147410099-6cf5dd8e-2f26-48f6-ab91-55e992c3a5f2.png">
+<img width="1271" alt="스크린샷 2021-12-26 22 56 42" src="https://user-images.githubusercontent.com/28756358/147410320-546f27ec-f23c-4f81-8f29-7bf7f38c9c38.png">
 
 
 ### 📌 12월 26일 (2) - 이벤트 작동 에러 발생
