@@ -6,13 +6,11 @@ type CategoryItemProps = {
 }
 
 const Item = styled.div`
-  margin: 2.5px 5px;
-  padding: 3px 5px;
   border-radius: 3px;
-  background: black;
+  margin-right: 8px;
   font-size: 14px;
-  font-weight: 700;
-  color: white;
+  font-weight: 500;
+  color: gray;
 `
 
 const CategoryItem: FunctionComponent<CategoryItemProps> = ({ children }) => {
