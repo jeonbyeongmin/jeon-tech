@@ -42,6 +42,14 @@ const Title = styled.div`
   -webkit-box-orient: vertical;
   font-size: 20px;
   font-weight: 700;
+
+  @media (max-width: 768px) {
+    font-weight: 500;
+    font-size: 18px;
+  }
+  @media (max-width: 568px) {
+    font-size: 16px;
+  }
 `
 
 const Date = styled.div`
@@ -49,6 +57,14 @@ const Date = styled.div`
   font-weight: 500;
   margin-bottom: 13px;
   opacity: 0.6;
+
+  @media (max-width: 768px) {
+    font-weight: 300;
+    font-size: 13px;
+  }
+  @media (max-width: 568px) {
+    font-size: 12px;
+  }
 `
 
 const Category = styled.div`
@@ -58,6 +74,14 @@ const Category = styled.div`
   font-size: 14px;
   font-weight: 500;
   opacity: 0.6;
+
+  @media (max-width: 768px) {
+    font-weight: 300;
+    font-size: 12px;
+  }
+  @media (max-width: 568px) {
+    font-size: 12px;
+  }
 `
 
 const RowFlex = styled.div`
@@ -77,6 +101,11 @@ const Summary = styled.div`
   -webkit-box-orient: vertical;
   font-size: 16px;
   opacity: 0.6;
+
+  @media (max-width: 768px) {
+    font-weight: 300;
+    font-size: 14px;
+  }
 `
 
 const PostItem: FunctionComponent<PostItemProps> = ({
