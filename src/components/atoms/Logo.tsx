@@ -8,6 +8,10 @@ type LogoImageProps = {
 
 const Jeondev = styled(GatsbyImage)`
   width: 108px;
+
+  @media (max-width: 768px) {
+    width: 80px;
+  }
 `
 
 const ImageWrapper = styled.div`
