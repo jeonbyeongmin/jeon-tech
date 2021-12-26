@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://my-website-link.com/sitemap/sitemap-index.xml
-Host: https://my-website-link.com
+Sitemap: https://https://jeondev.gatsbyjs.io/sitemap/sitemap-index.xml
+Host: https://jeondev.gatsbyjs.io
