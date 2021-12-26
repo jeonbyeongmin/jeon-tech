@@ -22,8 +22,13 @@ type GatsbyLinkProps = {
 const CategoryListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 768px;
+  width: 1200px;
   margin: 100px auto 0;
+
+  @media (max-width: 1260px) {
+    width: 100%;
+    padding: 0 20px;
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -35,11 +40,18 @@ const CategoryListWrapper = styled.div`
 const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   <Link {...props} />
 ))<CategoryItemProps>`
-  margin-right: 20px;
-  padding: 5px 0;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 5px 20px;
+  background-color: ${({ active }) => (active ? 'lightgray' : '#ededed')};
   font-size: 18px;
-  font-weight: ${({ active }) => (active ? '800' : '400')};
+  border-radius: 25px;
+  font-weight: ${({ active }) => (active ? '700' : '300')};
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 
   &:last-of-type {
     margin-right: 0;
@@ -55,13 +67,13 @@ const CategoryList: FunctionComponent<CategoryListProps> = ({
 }) => {
   return (
     <CategoryListWrapper>
-      {Object.entries(categoryList).map(([name, count]) => (
+      {Object.keys(categoryList).map(name => (
         <CategoryItem
           to={`/?category=${name}`}
           active={name === selectedCategory}
           key={name}
         >
-          #{name}({count})
+          {name}
         </CategoryItem>
       ))}
     </CategoryListWrapper>

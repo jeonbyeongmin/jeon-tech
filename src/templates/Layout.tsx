@@ -3,11 +3,12 @@ import styled from '@emotion/styled'
 import GlobalStyle from '../../GlobalStyle'
 import Footer from 'components/organisms/Footer'
 import { Helmet } from 'react-helmet'
+import Header from 'components/organisms/Header'
+import { graphql, useStaticQuery } from 'gatsby'
+import { useSiteMetadata } from 'hooks/use-site-metadata'
 
 type LayoutProps = {
-  title: string
-  description: string
-  url: string
+  url?: string
   image: string
   children: ReactNode
 }
@@ -18,13 +19,24 @@ const Container = styled.main`
   height: 100%;
 `
 
-const Layout: FunctionComponent<LayoutProps> = ({
-  title,
-  description,
-  url,
-  image,
-  children,
-}) => {
+const HeaderBlank = styled.div`
+  padding-top: 80px;
+`
+
+const Layout: FunctionComponent<LayoutProps> = ({ url, image, children }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      file(name: { eq: "logo-image" }) {
+        childImageSharp {
+          gatsbyImageData(width: 430, height: 120)
+        }
+        publicURL
+      }
+    }
+  `)
+  const { gatsbyImageData } = data.file.childImageSharp
+  const { title, description, siteUrl } = useSiteMetadata()
+
   return (
     <Container>
       <Helmet>
@@ -38,7 +50,7 @@ const Layout: FunctionComponent<LayoutProps> = ({
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
-        <meta property="og:url" content={url} />
+        <meta property="og:url" content={siteUrl || url} />
         <meta property="og:site_name" content={title} />
 
         <meta name="twitter:card" content="summary" />
@@ -58,7 +70,9 @@ const Layout: FunctionComponent<LayoutProps> = ({
 
         <html lang="ko" />
       </Helmet>
+      <Header logoImage={gatsbyImageData} />
       <GlobalStyle />
+      <HeaderBlank />
       {children}
       <Footer />
     </Container>
