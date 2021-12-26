@@ -48,7 +48,7 @@ const Layout: FunctionComponent<LayoutProps> = ({
 
         <meta
           name="google-site-verification"
-          content="google3e51bf806f021908.html"
+          content="P9xLRN_gkqMD5mNlmXDmTAdOJZOXWk-efvPfiABO338"
         />
 
         <html lang="ko" />
