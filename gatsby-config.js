@@ -1,13 +1,14 @@
 module.exports = {
   siteMetadata: {
-    title: `JeonDev`,
-    description: `주니어 개발자로서의 저를 표현한 블로그입니다.`,
-    author: `Jeon`,
-    siteUrl: 'https://jeondev.gatsbyjs.io', // 변경 예정
+    title: `JEON.DEV`,
+    description: `📌 내가 만들고 내가 쓰는 기술 블로그`,
+    author: `Byeongmin Jeon`,
+    siteUrl: `https://jeondev.gatsbyjs.io`, // 변경 예정
+    logo: `./static/logo-image.png`,
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-typescript',
+      resolve: `gatsby-plugin-typescript`,
       options: {
         isTSX: true,
         allExtensions: true,
@@ -15,17 +16,17 @@ module.exports = {
     },
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
-    'gatsby-plugin-sitemap',
+    `gatsby-plugin-sitemap`,
     {
-      resolve: 'gatsby-plugin-robots-txt',
+      resolve: `gatsby-plugin-robots-txt`,
       options: {
         policy: [{ userAgent: '*', allow: '/' }],
       },
     },
     {
-      resolve: 'gatsby-plugin-canonical-urls',
+      resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: 'https://jtech.gatsbyjs.io', // 변경예정
+        siteUrl: `https://jtech.gatsbyjs.io`, // 변경예정
         stripQueryString: true,
       },
     },
