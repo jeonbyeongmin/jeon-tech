@@ -5,7 +5,7 @@ import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 type IconProps = {
   image: IGatsbyImageData
   alter: string
-  onToggleClick: React.MouseEventHandler<HTMLImageElement> | undefined
+  onToggleClick: React.MouseEventHandler<HTMLImageElement>
 }
 
 const IconImage = styled(GatsbyImage)`
