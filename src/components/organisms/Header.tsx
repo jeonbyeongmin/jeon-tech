@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useState } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 
 import { IGatsbyImageData, GatsbyImage } from 'gatsby-plugin-image'
@@ -129,8 +129,11 @@ const Header: FunctionComponent<HeaderProps> = ({ logoImage }) => {
   const { gatsbyImageData: xImg } = data.letterX.childImageSharp
   const { gatsbyImageData: moonImg } = data.moon.childImageSharp
   const { gatsbyImageData: sunImg } = data.sun.childImageSharp
-
   const [modalToggle, setModalToggle] = useState<boolean>(false)
+
+  useEffect(() => {
+    console.log(modalToggle)
+  }, [modalToggle])
 
   return (
     <>
