@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `JTech`,
+    title: `JeonDev`,
     description: `주니어 개발자로서의 저를 표현한 블로그입니다.`,
     author: `Jeon`,
-    siteUrl: 'https://jtech.gatsbyjs.io', // 변경 예정
+    siteUrl: 'https://jeondev.gatsbyjs.io', // 변경 예정
   },
   plugins: [
     {
