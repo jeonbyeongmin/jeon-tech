@@ -1,7 +1,6 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import CategoryItem from 'components/atoms/CategoryItem'
 import { PostFrontmatterType } from 'types/PostItem.types'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
@@ -10,26 +9,19 @@ type PostItemProps = PostFrontmatterType & { link: string }
 const PostItemWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   transition: 0.3s box-shadow;
+  /* height: 420px; */
   cursor: pointer;
-
-  &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
 `
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
-  height: 200px;
-  border-radius: 10px 10px 0 0;
+  height: 250px;
 `
 
 const PostItemContent = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 10px;
 `
 
 const Title = styled.div`
@@ -47,15 +39,24 @@ const Title = styled.div`
 
 const Date = styled.div`
   font-size: 14px;
-  font-weight: 400;
-  opacity: 0.7;
+  font-weight: 500;
+  margin-bottom: 13px;
+  opacity: 0.6;
 `
 
 const Category = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
-  margin: 10px -5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: 500;
+  opacity: 0.6;
+`
+
+const RowFlex = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `
 
 const Summary = styled.div`
@@ -65,10 +66,10 @@ const Summary = styled.div`
   text-overflow: ellipsis;
   white-space: normal;
   overflow-wrap: break-word;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   font-size: 16px;
-  opacity: 0.8;
+  opacity: 0.6;
 `
 
 const PostItem: FunctionComponent<PostItemProps> = ({
@@ -86,13 +87,11 @@ const PostItem: FunctionComponent<PostItemProps> = ({
       <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
 
       <PostItemContent>
+        <RowFlex>
+          <Category>{categories.join(' / ')}</Category>
+          <Date>{date}</Date>
+        </RowFlex>
         <Title>{title}</Title>
-        <Date>{date}</Date>
-        <Category>
-          {categories.map(category => (
-            <CategoryItem key={category}>{category}</CategoryItem>
-          ))}
-        </Category>
         <Summary>{summary}</Summary>
       </PostItemContent>
     </PostItemWrapper>
