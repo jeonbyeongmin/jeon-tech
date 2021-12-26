@@ -14,7 +14,7 @@
 <br/>
 <br/>
 
-<img width="1271" alt="스크린샷 2021-12-26 22 56 42" src="https://user-images.githubusercontent.com/28756358/147410320-546f27ec-f23c-4f81-8f29-7bf7f38c9c38.png">
+<img width="1976" alt="스크린샷 2021-12-26 23 01 36" src="https://user-images.githubusercontent.com/28756358/147410446-9edaf17d-cc0a-48a1-8e4c-849ba6c063bd.png">
 
 <br/>
 
