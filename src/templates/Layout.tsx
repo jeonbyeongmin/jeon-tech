@@ -51,6 +51,11 @@ const Layout: FunctionComponent<LayoutProps> = ({
           content="P9xLRN_gkqMD5mNlmXDmTAdOJZOXWk-efvPfiABO338"
         />
 
+        <meta
+          name="naver-site-verification"
+          content="9ae8eb02f2eb031c1bb76597981ff0cca07e9d06"
+        />
+
         <html lang="ko" />
       </Helmet>
       <GlobalStyle />
