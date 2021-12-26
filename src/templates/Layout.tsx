@@ -48,7 +48,7 @@ const Layout: FunctionComponent<LayoutProps> = ({
 
         <meta
           name="google-site-verification"
-          content="웹 마스터 도구가 제공하는 Meta 태그"
+          content="google3e51bf806f021908.html"
         />
 
         <html lang="ko" />
