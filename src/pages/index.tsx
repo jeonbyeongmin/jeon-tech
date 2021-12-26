@@ -1,14 +1,14 @@
 import React, { FunctionComponent, useMemo } from 'react'
+import { graphql } from 'gatsby'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
+import queryString, { ParsedQuery } from 'query-string' // URL을 통해 카테고리를 파싱
 import Introduction from 'components/organisms/Introduction'
 import CategoryList, {
   CategoryListProps,
 } from 'components/organisms/CategoryList'
 import PostList from 'components/organisms/PostList'
-import { graphql } from 'gatsby'
-import { PostListItemType } from 'types/PostItem.types'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
-import queryString, { ParsedQuery } from 'query-string' // URL을 통해 카테고리를 파싱
 import Layout from '../templates/Layout'
+import { PostListItemType } from 'types/PostItem.types'
 
 type IndexPageProps = {
   location: {
@@ -25,7 +25,7 @@ type IndexPageProps = {
     allMarkdownRemark: {
       edges: PostListItemType[]
     }
-    file: {
+    profile: {
       childImageSharp: {
         gatsbyImageData: IGatsbyImageData
       }
@@ -37,13 +37,10 @@ type IndexPageProps = {
 const IndexPage: FunctionComponent<IndexPageProps> = ({
   location: { search },
   data: {
-    site: {
-      siteMetadata: { title, description, siteUrl },
-    },
     allMarkdownRemark: { edges },
-    file: {
-      childImageSharp: { gatsbyImageData },
-      publicURL,
+    profile: {
+      childImageSharp: { gatsbyImageData: profileImage },
+      publicURL: profileURL,
     },
   },
 }) => {
@@ -79,13 +76,8 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
     [],
   )
   return (
-    <Layout
-      title={title}
-      description={description}
-      url={siteUrl}
-      image={publicURL}
-    >
-      <Introduction profileImage={gatsbyImageData} />
+    <Layout image={profileURL}>
+      {/* <Introduction profileImage={profileImage} /> */}
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
@@ -97,13 +89,6 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
 
 export const getPostList = graphql`
   query getPostList {
-    site {
-      siteMetadata {
-        title
-        description
-        siteUrl
-      }
-    }
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
     ) {
@@ -127,7 +112,7 @@ export const getPostList = graphql`
         }
       }
     }
-    file(name: { eq: "profile-image" }) {
+    profile: file(name: { eq: "profile-image" }) {
       childImageSharp {
         gatsbyImageData(width: 120, height: 120)
       }
