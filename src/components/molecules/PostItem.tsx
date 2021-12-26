@@ -10,12 +10,19 @@ const PostItemWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   transition: 0.3s box-shadow;
-  /* height: 420px; */
   cursor: pointer;
 `
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
   height: 250px;
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+
+  @media (max-width: 568px) {
+    height: 150px;
+  }
 `
 
 const PostItemContent = styled.div`
