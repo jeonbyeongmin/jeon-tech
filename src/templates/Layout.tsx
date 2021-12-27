@@ -5,7 +5,7 @@ import Footer from 'components/organisms/Footer'
 import { Helmet } from 'react-helmet'
 import Header from 'components/organisms/Header'
 import { graphql, useStaticQuery } from 'gatsby'
-import { useSiteMetadata } from 'hooks/use-site-metadata'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 type LayoutProps = {
   url?: string
