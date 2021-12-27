@@ -73,6 +73,7 @@ const Header: FunctionComponent<HeaderProps> = ({ logoImage }) => {
           <Logo logoImage={logoImage} alter="jeon.dev logo" />
           <MenuItems />
           <Icon
+            className="mobile-menu"
             iconImage={hamburgerImg}
             alter="hamburger icon"
             onToggleClick={() => setModalToggle(prev => !prev)}

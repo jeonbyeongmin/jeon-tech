@@ -5,7 +5,6 @@ import Footer from 'components/organisms/Footer'
 import { Helmet } from 'react-helmet'
 import Header from 'components/organisms/Header'
 import { graphql, useStaticQuery } from 'gatsby'
-import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 type LayoutProps = {
   url?: string
@@ -18,11 +17,17 @@ type LayoutProps = {
 const Container = styled.main`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  min-height: 100vh;
+  position: relative;
 `
 
 const HeaderBlank = styled.div`
   padding-top: 80px;
+`
+
+const BodyContent = styled.div`
+  height: auto;
+  min-height: 100%;
 `
 
 const Layout: FunctionComponent<LayoutProps> = ({
@@ -80,7 +85,8 @@ const Layout: FunctionComponent<LayoutProps> = ({
       <Header logoImage={gatsbyImageData} />
       <GlobalStyle />
       <HeaderBlank />
-      {children}
+      <BodyContent>{children}</BodyContent>
+
       <Footer />
     </Container>
   )

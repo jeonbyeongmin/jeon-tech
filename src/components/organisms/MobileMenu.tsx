@@ -36,7 +36,12 @@ const MobileMenu: FunctionComponent<MobileMenuProps> = ({
     <MobileMenuWrapper>
       <MobileMenuItems />
       <IconPosition>
-        <Icon iconImage={image} alter={alter} onToggleClick={onToggleClick} />
+        <Icon
+          className="mobile-menu"
+          iconImage={image}
+          alter={alter}
+          onToggleClick={onToggleClick}
+        />
       </IconPosition>
     </MobileMenuWrapper>
   )
