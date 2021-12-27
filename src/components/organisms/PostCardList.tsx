@@ -22,7 +22,7 @@ const PostCardListWrapper = styled.div`
     padding: 50px 30px;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 668px) {
     grid-template-columns: 1fr;
     width: 100%;
     padding: 50px 30px;

@@ -14,14 +14,14 @@ const PostCardWrapper = styled(Link)`
 `
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
-  height: 250px;
-
+  height: 220px;
+  /*   
   @media (max-width: 768px) {
     height: 200px;
-  }
+  } */
 
   @media (max-width: 568px) {
-    height: 150px;
+    height: 200px;
   }
 `
 
