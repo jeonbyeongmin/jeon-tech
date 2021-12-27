@@ -9,7 +9,9 @@ import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 type LayoutProps = {
   url?: string
+  title: string
   image: string
+  description: string
   children: ReactNode
 }
 
@@ -23,7 +25,13 @@ const HeaderBlank = styled.div`
   padding-top: 80px;
 `
 
-const Layout: FunctionComponent<LayoutProps> = ({ url, image, children }) => {
+const Layout: FunctionComponent<LayoutProps> = ({
+  url,
+  title,
+  description,
+  image,
+  children,
+}) => {
   const data = useStaticQuery(graphql`
     query {
       file(name: { eq: "logo-image" }) {
@@ -35,7 +43,6 @@ const Layout: FunctionComponent<LayoutProps> = ({ url, image, children }) => {
     }
   `)
   const { gatsbyImageData } = data.file.childImageSharp
-  const { title, description, siteUrl } = useSiteMetadata()
 
   return (
     <Container>
@@ -50,7 +57,7 @@ const Layout: FunctionComponent<LayoutProps> = ({ url, image, children }) => {
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:image" content={image} />
-        <meta property="og:url" content={siteUrl || url} />
+        <meta property="og:url" content={url} />
         <meta property="og:site_name" content={title} />
 
         <meta name="twitter:card" content="summary" />

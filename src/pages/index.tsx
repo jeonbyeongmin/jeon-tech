@@ -10,6 +10,7 @@ import CategoryList, {
 } from 'components/organisms/CategoryList'
 import PostCardList from 'components/organisms/PostCardList'
 import Layout from '../templates/Layout'
+import { useSiteMetadata } from 'hooks/useSiteMetadata'
 
 type IndexPageProps = {
   location: {
@@ -45,6 +46,8 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
     },
   },
 }) => {
+  const { title, description, siteUrl } = useSiteMetadata()
+
   // 📌 URL에서 카테고리 파싱해서 selectedCategory를 정함
   const parsed: ParsedQuery<string> = queryString.parse(search)
   const selectedCategory: string =
@@ -76,8 +79,14 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
       ),
     [],
   )
+
   return (
-    <Layout image={profileURL}>
+    <Layout
+      image={profileURL}
+      title={title}
+      description={description}
+      url={siteUrl}
+    >
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
