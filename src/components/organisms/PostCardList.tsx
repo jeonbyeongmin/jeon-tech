@@ -17,7 +17,7 @@ const PostCardListWrapper = styled.div`
   margin: 0 auto;
   padding: 50px 30px 100px;
 
-  @media (max-width: 1140px) {
+  @media (max-width: 1200px) {
     width: 100%;
     padding: 50px 30px;
   }
