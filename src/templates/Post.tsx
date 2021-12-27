@@ -1,9 +1,11 @@
+import React, { FunctionComponent } from 'react'
+import { graphql } from 'gatsby'
+
+import { PostFrontmatterType } from 'types/PostItem.types'
+
+import Layout from './Layout'
 import PostContent from 'components/organisms/PostContent'
 import PostHeader from 'components/organisms/PostHeader'
-import { graphql } from 'gatsby'
-import React, { FunctionComponent } from 'react'
-import { PostFrontmatterType } from 'types/PostItem.types'
-import Layout from './Layout'
 
 export type PostPageItemType = {
   node: {

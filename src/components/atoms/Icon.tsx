@@ -3,9 +3,10 @@ import styled from '@emotion/styled'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 type IconProps = {
-  image: IGatsbyImageData
+  iconImage: IGatsbyImageData
   alter: string
-  onToggleClick: React.MouseEventHandler<HTMLImageElement> | undefined
+  className?: string
+  onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined
 }
 
 const IconImage = styled(GatsbyImage)`
@@ -30,20 +31,17 @@ const IconWrapper = styled.div`
     align-items: center;
     justify-content: center;
   }
-  &:hover {
-    background-color: #ededed;
-    transition: all ease-out 0.2s;
-  }
 `
 
 const Icon: FunctionComponent<IconProps> = ({
-  image,
+  iconImage,
   alter,
   onToggleClick,
+  className,
 }) => {
   return (
-    <IconWrapper onClick={onToggleClick}>
-      <IconImage image={image} alt={alter} />
+    <IconWrapper onClick={onToggleClick} className={className}>
+      <IconImage image={iconImage} alt={alter} className={className} />
     </IconWrapper>
   )
 }

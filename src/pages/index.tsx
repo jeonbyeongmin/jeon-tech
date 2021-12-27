@@ -2,13 +2,14 @@ import React, { FunctionComponent, useMemo } from 'react'
 import { graphql } from 'gatsby'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import queryString, { ParsedQuery } from 'query-string' // URL을 통해 카테고리를 파싱
-import Introduction from 'components/organisms/Introduction'
+
+import { PostType } from 'types/PostItem.types'
+
 import CategoryList, {
   CategoryListProps,
 } from 'components/organisms/CategoryList'
-import PostList from 'components/organisms/PostList'
+import PostCardList from 'components/organisms/PostCardList'
 import Layout from '../templates/Layout'
-import { PostListItemType } from 'types/PostItem.types'
 
 type IndexPageProps = {
   location: {
@@ -23,7 +24,7 @@ type IndexPageProps = {
       }
     }
     allMarkdownRemark: {
-      edges: PostListItemType[]
+      edges: PostType[]
     }
     profile: {
       childImageSharp: {
@@ -39,7 +40,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
   data: {
     allMarkdownRemark: { edges },
     profile: {
-      childImageSharp: { gatsbyImageData: profileImage },
+      // childImageSharp: { gatsbyImageData: profileImage },
       publicURL: profileURL,
     },
   },
@@ -60,7 +61,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
             node: {
               frontmatter: { categories },
             },
-          }: PostListItemType,
+          }: PostType,
         ) => {
           categories.forEach(category => {
             if (list[category] === undefined) list[category] = 1
@@ -77,12 +78,11 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
   )
   return (
     <Layout image={profileURL}>
-      {/* <Introduction profileImage={profileImage} /> */}
       <CategoryList
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
-      <PostList selectedCategory={selectedCategory} posts={edges} />
+      <PostCardList selectedCategory={selectedCategory} posts={edges} />
     </Layout>
   )
 }

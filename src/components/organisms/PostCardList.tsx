@@ -1,15 +1,15 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import PostItem from 'components/molecules/PostItem'
-import { PostListItemType } from 'types/PostItem.types'
+import PostCard from 'components/molecules/PostCard'
+import { PostType } from 'types/PostItem.types'
 import useInfiniteScroll from 'hooks/useInfiniteScroll'
 
-type PostListProps = {
+type PostCardListProps = {
   selectedCategory: string
-  posts: PostListItemType[]
+  posts: PostType[]
 }
 
-const PostListWrapper = styled.div`
+const PostCardListWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 35px;
@@ -29,13 +29,13 @@ const PostListWrapper = styled.div`
   }
 `
 
-const PostList: FunctionComponent<PostListProps> = ({
+const PostCardList: FunctionComponent<PostCardListProps> = ({
   selectedCategory,
   posts,
 }) => {
   const { containerRef, postList } = useInfiniteScroll(selectedCategory, posts)
   return (
-    <PostListWrapper ref={containerRef}>
+    <PostCardListWrapper ref={containerRef}>
       {postList.map(
         ({
           node: {
@@ -43,12 +43,12 @@ const PostList: FunctionComponent<PostListProps> = ({
             fields: { slug },
             frontmatter,
           },
-        }: PostListItemType) => (
-          <PostItem {...frontmatter} link={slug} key={id} />
+        }: PostType) => (
+          <PostCard {...frontmatter} link={slug} key={id} />
         ),
       )}
-    </PostListWrapper>
+    </PostCardListWrapper>
   )
 }
 
-export default PostList
+export default PostCardList

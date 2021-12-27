@@ -4,9 +4,9 @@ import { Link } from 'gatsby'
 import { PostFrontmatterType } from 'types/PostItem.types'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-type PostItemProps = PostFrontmatterType & { link: string }
+type PostCardProps = PostFrontmatterType & { link: string }
 
-const PostItemWrapper = styled(Link)`
+const PostCardWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   transition: 0.3s box-shadow;
@@ -108,7 +108,7 @@ const Summary = styled.div`
   }
 `
 
-const PostItem: FunctionComponent<PostItemProps> = ({
+const PostCard: FunctionComponent<PostCardProps> = ({
   title,
   date,
   categories,
@@ -119,7 +119,7 @@ const PostItem: FunctionComponent<PostItemProps> = ({
   link,
 }) => {
   return (
-    <PostItemWrapper to={link}>
+    <PostCardWrapper to={link}>
       <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
 
       <PostItemContent>
@@ -130,8 +130,8 @@ const PostItem: FunctionComponent<PostItemProps> = ({
         <Title>{title}</Title>
         <Summary>{summary}</Summary>
       </PostItemContent>
-    </PostItemWrapper>
+    </PostCardWrapper>
   )
 }
 
-export default PostItem
+export default PostCard
