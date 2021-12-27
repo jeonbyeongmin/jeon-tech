@@ -10,7 +10,7 @@ import CategoryList, {
 } from 'components/organisms/CategoryList'
 import PostCardList from 'components/organisms/PostCardList'
 import Layout from '../templates/Layout'
-import { useSiteMetadata } from 'hooks/useSiteMetadata'
+import { useSiteMetadata } from 'hooks/use-site-metadata'
 
 type IndexPageProps = {
   location: {
