@@ -41,7 +41,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
   data: {
     allMarkdownRemark: { edges },
     profile: {
-      // childImageSharp: { gatsbyImageData: profileImage },
+      childImageSharp: { gatsbyImageData: profileImage },
       publicURL: profileURL,
     },
   },
