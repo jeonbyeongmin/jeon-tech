@@ -1,12 +1,15 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
+import { Link } from 'gatsby'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
-type LogoImageProps = {
+type LogoProps = {
   logoImage: IGatsbyImageData
+  alter: string
+  className?: string
 }
 
-const Jeondev = styled(GatsbyImage)`
+const LogoImage = styled(GatsbyImage)`
   width: 108px;
 
   @media (max-width: 768px) {
@@ -14,15 +17,21 @@ const Jeondev = styled(GatsbyImage)`
   }
 `
 
-const ImageWrapper = styled.div`
+const LogoWrapper = styled.div`
   padding: 30px;
 `
 
-const Logo: FunctionComponent<LogoImageProps> = ({ logoImage }) => {
+const Logo: FunctionComponent<LogoProps> = ({
+  logoImage,
+  alter,
+  className,
+}) => {
   return (
-    <ImageWrapper>
-      <Jeondev image={logoImage} alt="JeonDev Logo" />
-    </ImageWrapper>
+    <Link to="/">
+      <LogoWrapper className={className}>
+        <LogoImage image={logoImage} alt={alter} className={className} />
+      </LogoWrapper>
+    </Link>
   )
 }
 
