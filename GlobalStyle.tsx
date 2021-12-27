@@ -17,6 +17,12 @@ const defaultStyle = css`
     height: 100%;
   }
 
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
   a,
   a:hover {
     color: inherit;

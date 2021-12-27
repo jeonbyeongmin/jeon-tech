@@ -10,26 +10,35 @@ type IconProps = {
 }
 
 const IconImage = styled(GatsbyImage)`
-  display: none;
   width: 20px;
   cursor: pointer;
 
-  @media (max-width: 768px) {
-    display: block;
+  &.mobile-menu {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+    }
   }
 `
 
 const IconWrapper = styled.div`
-  display: none;
-  width: 40px;
-  height: 40px;
-  margin-right: 30px;
-  border-radius: 50%;
+  &.mobile-menu {
+    display: none;
+    width: 40px;
+    height: 40px;
+    margin-right: 30px;
+    border-radius: 50%;
 
-  @media (max-width: 768px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @media (max-width: 768px) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &.footer-social-icon {
+    margin-left: 20px;
   }
 `
 

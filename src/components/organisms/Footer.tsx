@@ -1,11 +1,16 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 
+import SocialIcons from 'components/molecules/SocialIcons'
+
 const FooterWrapper = styled.footer`
-  display: grid;
-  place-items: center;
+  height: 200px;
+  display: flex;
   margin-top: auto;
-  padding: 50px 0;
+  align-items: center;
+  justify-content: center;
+
+  padding: 80px 0px;
   font-size: 15px;
   text-align: center;
   line-height: 1.5;
@@ -15,11 +20,21 @@ const FooterWrapper = styled.footer`
   }
 `
 
+const FooterInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 1200px;
+  padding: 0px 30px;
+`
+
 const Footer: FunctionComponent = () => {
   return (
     <FooterWrapper>
-      Thank You for Visiting My Blog, Have a Good Day 😆
-      <br />© 2021 Developer Byeongmin Jeon, Powered By Gatsby.
+      <FooterInner>
+        &copy; {new Date().getFullYear()} JEON.DEV
+        <SocialIcons />
+      </FooterInner>
     </FooterWrapper>
   )
 }
