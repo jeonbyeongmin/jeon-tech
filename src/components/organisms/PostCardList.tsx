@@ -13,15 +13,12 @@ const PostCardListWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
-  width: 1044px;
+  max-width: 1044px;
   margin: 0 auto;
   padding: 50px 20px 100px;
+  width: 100%;
 
-  @media (max-width: 1006px) {
-    width: 100%;
-  }
-
-  @media (max-width: 668px) {
+  @media (max-width: 767px) {
     grid-template-columns: 1fr;
     width: 100%;
     grid-gap: 40px;

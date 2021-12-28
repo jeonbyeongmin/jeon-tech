@@ -26,7 +26,7 @@ const HeaderWrapper = styled.header`
   z-index: 1000;
   background-color: #fff;
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     font-size: 13px;
     height: 60px;
   }
@@ -37,10 +37,10 @@ const HeaderInner = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   max-width: 1044px;
   padding: 20px;
   margin: 0 auto;
-  width: 100%;
 `
 
 const Header: FunctionComponent<HeaderProps> = ({ logoImage }) => {

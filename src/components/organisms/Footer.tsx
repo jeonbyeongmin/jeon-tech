@@ -9,13 +9,12 @@ const FooterWrapper = styled.footer`
   margin-top: auto;
   align-items: center;
   justify-content: center;
-
   padding: 80px 0px;
   font-size: 15px;
   text-align: center;
   line-height: 1.5;
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     font-size: 13px;
   }
 `
@@ -24,7 +23,8 @@ const FooterInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1044px;
+  width: 100%;
+  max-width: 1044px;
   padding: 0px 20px;
 `
 

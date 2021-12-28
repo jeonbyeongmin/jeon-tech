@@ -9,45 +9,37 @@ type PostCardProps = PostFrontmatterType & { link: string }
 const PostCardWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
-  transition: 0.3s box-shadow;
   cursor: pointer;
 `
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
   height: 220px;
-  /*   
-  @media (max-width: 768px) {
-    height: 200px;
-  } */
-
-  @media (max-width: 568px) {
-    height: 200px;
-  }
 `
 
 const PostItemContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 10px;
+
+  @media (max-width: 767px) {
+    padding: 5px;
+  }
 `
 
 const Title = styled.div`
   display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   margin-bottom: 3px;
   text-overflow: ellipsis;
   white-space: normal;
   overflow-wrap: break-word;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   font-size: 20px;
   font-weight: 700;
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     font-weight: 500;
-    font-size: 18px;
-  }
-  @media (max-width: 568px) {
     font-size: 16px;
   }
 `
@@ -58,12 +50,9 @@ const Date = styled.div`
   margin-bottom: 13px;
   opacity: 0.6;
 
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     font-weight: 300;
-    font-size: 13px;
-  }
-  @media (max-width: 568px) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `
 
@@ -77,10 +66,7 @@ const Category = styled.div`
 
   @media (max-width: 768px) {
     font-weight: 300;
-    font-size: 12px;
-  }
-  @media (max-width: 568px) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `
 
