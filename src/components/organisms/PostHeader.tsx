@@ -17,19 +17,32 @@ type PostHeaderProps = {
 }
 
 const PostHeaderWrapper = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  height: 400px;
+  height: 800px;
+
+  @media (max-width: 1024px) {
+    height: 600px;
+  }
+
+  @media (max-width: 767px) {
+    height: 500px;
+  }
 `
 
 const BackgroundImage = styled((props: GatsbyImgProps) => (
-  <GatsbyImage {...props} style={{ position: 'absolute' }} />
+  <GatsbyImage {...props} />
 ))`
-  z-index: -1;
-  width: 100%;
-  height: 400px;
+  width: 1024px;
+  height: 600px;
   object-fit: cover;
-  filter: brightness(0.25);
+
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `
 
 const PostHeader: FunctionComponent<PostHeaderProps> = ({
@@ -40,8 +53,8 @@ const PostHeader: FunctionComponent<PostHeaderProps> = ({
 }) => {
   return (
     <PostHeaderWrapper>
-      <BackgroundImage image={thumbnail} alt="thumbnail" />
       <PostHeaderInfo title={title} date={date} categories={categories} />
+      <BackgroundImage image={thumbnail} alt="thumbnail" />
     </PostHeaderWrapper>
   )
 }

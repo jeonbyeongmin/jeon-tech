@@ -4,6 +4,7 @@ import styled from '@emotion/styled'
 type PostContentProps = {
   html: string
 }
+
 const MarkdownRenderer = styled.div`
   // Renderer Style
   display: flex;
@@ -98,6 +99,7 @@ const MarkdownRenderer = styled.div`
   pre[class*='language-'] {
     tab-size: 2;
   }
+
   // Markdown Responsive Design
   @media (max-width: 768px) {
     width: 100%;
@@ -128,7 +130,11 @@ const MarkdownRenderer = styled.div`
 `
 
 const PostContent: FunctionComponent<PostContentProps> = ({ html }) => {
-  return <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <article itemScope itemType="http://schema.org/Article">
+      <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+    </article>
+  )
 }
 
 export default PostContent
