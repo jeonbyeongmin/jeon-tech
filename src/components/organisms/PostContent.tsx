@@ -28,7 +28,7 @@ const MarkdownRenderer = styled.div`
   h1,
   h2,
   h3 {
-    font-weight: 800;
+    font-weight: 700;
     margin-bottom: 30px;
   }
 

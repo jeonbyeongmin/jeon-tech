@@ -11,7 +11,7 @@ const PostHeadInfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 787px;
+  width: 768px;
   margin: 0 auto;
   padding: 60px 20px;
   color: black;
@@ -31,11 +31,11 @@ const Title = styled.div`
   white-space: normal;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  font-size: 45px;
+  font-size: 40px;
   font-weight: 700;
 
   @media (max-width: 767px) {
-    font-size: 30px;
+    font-size: 25px;
   }
 `
 
