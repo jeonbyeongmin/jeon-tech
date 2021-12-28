@@ -18,7 +18,7 @@ const LogoImage = styled(GatsbyImage)`
 `
 
 const LogoWrapper = styled.div`
-  padding: 30px;
+  /* padding: 30px; */
 `
 
 const Logo: FunctionComponent<LogoProps> = ({

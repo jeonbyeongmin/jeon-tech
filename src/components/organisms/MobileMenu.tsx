@@ -24,7 +24,7 @@ const MobileMenuWrapper = styled.div`
 const IconPosition = styled.div`
   position: fixed;
   top: 10px;
-  right: 0px;
+  right: 20px;
 `
 
 const MobileMenu: FunctionComponent<MobileMenuProps> = ({

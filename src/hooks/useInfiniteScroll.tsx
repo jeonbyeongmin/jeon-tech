@@ -3,14 +3,14 @@ import { PostType } from 'types/PostItem.types'
 
 export type useInfiniteScrollType = {
   containerRef: MutableRefObject<HTMLDivElement | null>
-  postList: PostListItemType[]
+  postList: PostType[]
 }
 
 const NUMBER_OF_ITEMS_PER_PAGE = 10
 
 const useInfiniteScroll = (
   selectedCategory: string,
-  posts: PostListItemType[],
+  posts: PostType[],
 ): useInfiniteScrollType => {
   const containerRef: MutableRefObject<HTMLDivElement | null> =
     useRef<HTMLDivElement>(null)
@@ -18,14 +18,14 @@ const useInfiniteScroll = (
     useRef<IntersectionObserver>(null)
   const [count, setCount] = useState<number>(1)
 
-  const postListByCategory = useMemo<PostListItemType[]>(
+  const postListByCategory = useMemo<PostType[]>(
     () =>
       posts.filter(
         ({
           node: {
             frontmatter: { categories },
           },
-        }: PostListItemType) =>
+        }: PostType) =>
           selectedCategory !== 'All'
             ? categories.includes(selectedCategory)
             : true,

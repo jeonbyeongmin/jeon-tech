@@ -24,8 +24,8 @@ const FooterInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 1200px;
-  padding: 0px 30px;
+  width: 1044px;
+  padding: 0px 20px;
 `
 
 const Footer: FunctionComponent = () => {

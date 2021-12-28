@@ -27,7 +27,6 @@ const IconWrapper = styled.div`
     display: none;
     width: 40px;
     height: 40px;
-    margin-right: 30px;
     border-radius: 50%;
 
     @media (max-width: 768px) {

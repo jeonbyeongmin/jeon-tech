@@ -22,7 +22,7 @@ const ModeButton = styled(GatsbyImage)`
   width: 20px;
   height: 20px;
   margin-left: 30px;
-  margin-right: 30px;
+  /* margin-right: 30px; */
   cursor: pointer;
 `
 
