@@ -49,7 +49,6 @@ const Title = styled.div`
 
 const Date = styled.div`
   font-size: 14px;
-
   margin-bottom: 13px;
   opacity: 0.6;
 
@@ -64,7 +63,6 @@ const Category = styled.div`
   flex-wrap: wrap;
   margin-bottom: 15px;
   font-size: 14px;
-
   opacity: 0.6;
 
   @media (max-width: 768px) {
