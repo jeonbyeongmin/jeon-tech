@@ -62,7 +62,9 @@ const PostHeaderInfo: FunctionComponent<PostHeadInfoProps> = ({
     <PostHeadInfoWrapper>
       <Title>{title}</Title>
       <PostData>
-        {categories.join(`/`)}
+        {categories.map((item, idx) => {
+          return idx !== categories.length - 1 ? item + ' / ' : item
+        })}
         <div>{date}</div>
       </PostData>
     </PostHeadInfoWrapper>

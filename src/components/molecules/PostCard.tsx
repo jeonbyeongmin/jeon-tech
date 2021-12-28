@@ -111,7 +111,11 @@ const PostCard: FunctionComponent<PostCardProps> = ({
 
       <PostItemContent>
         <RowFlex>
-          <Category>{categories.join('/')}</Category>
+          <Category>
+            {categories.map((item, idx) => {
+              return idx !== categories.length - 1 ? item + ' / ' : item
+            })}
+          </Category>
           <Date>{date}</Date>
         </RowFlex>
         <Title>{title}</Title>
