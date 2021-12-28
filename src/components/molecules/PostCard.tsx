@@ -60,7 +60,6 @@ const Date = styled.div`
 
 const Category = styled.div`
   display: flex;
-  flex-wrap: wrap;
   margin-bottom: 15px;
   font-size: 14px;
   opacity: 0.6;
@@ -108,14 +107,9 @@ const PostCard: FunctionComponent<PostCardProps> = ({
   return (
     <PostCardWrapper to={link}>
       <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
-
       <PostItemContent>
         <RowFlex>
-          <Category>
-            {categories.map((item, idx) => {
-              return idx !== categories.length - 1 ? item + ' / ' : item
-            })}
-          </Category>
+          <Category>{categories.join(' / ')}</Category>
           <Date>{date}</Date>
         </RowFlex>
         <Title>{title}</Title>
