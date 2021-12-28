@@ -14,6 +14,10 @@ const PostCardWrapper = styled(Link)`
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
   height: 220px;
+
+  @media (max-width: 767px) {
+    height: 200px;
+  }
 `
 
 const PostItemContent = styled.div`
