@@ -40,17 +40,16 @@ const Title = styled.div`
   white-space: normal;
   overflow-wrap: break-word;
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 500;
 
   @media (max-width: 767px) {
-    font-weight: 500;
     font-size: 16px;
   }
 `
 
 const Date = styled.div`
   font-size: 14px;
-  font-weight: 500;
+
   margin-bottom: 13px;
   opacity: 0.6;
 
@@ -65,7 +64,7 @@ const Category = styled.div`
   flex-wrap: wrap;
   margin-bottom: 15px;
   font-size: 14px;
-  font-weight: 500;
+
   opacity: 0.6;
 
   @media (max-width: 768px) {
