@@ -25,11 +25,11 @@ const PostHeaderWrapper = styled.div`
   height: 800px;
 
   @media (max-width: 1024px) {
-    height: 600px;
+    height: 800px;
   }
 
   @media (max-width: 767px) {
-    height: 500px;
+    height: 450px;
   }
 `
 
@@ -42,6 +42,11 @@ const BackgroundImage = styled((props: GatsbyImgProps) => (
 
   @media (max-width: 1024px) {
     width: 100%;
+  }
+
+  @media (max-width: 787px) {
+    width: 100%;
+    height: 500px;
   }
 `
 
