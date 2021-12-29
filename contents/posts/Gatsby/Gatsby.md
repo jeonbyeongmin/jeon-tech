@@ -34,7 +34,7 @@ thumbnail: './gatsby.png'
 
 ### Gatsby와 검색 엔진 최적화(SEO)
 
-결론적으로 Gatsby로 정적페이지를 만들어내면 SEO에 유리합니다. 브라우저의 성능이 점점 좋아지며 Single Page Application(SPA) 형태의 웹 사이트가 유행하기 시작하던 시점에 React, Vue같은 Client Side Rendering(CSR) 방식의 프레임워크들이 등장하였습니다. 하지만 CSR의 한계점으로 SEO가 자주 거론 되었고 이를 해결하기 위한 노력들이 필요했습니다.
+블로그는 많은 사람들이 보기 위해서 SEO를 하지 않으면 안된다고 생각했습니다. 결론적으로 Gatsby로 정적페이지를 만들어내면 SEO에 유리했죠. 브라우저의 성능이 점점 좋아지며 Single Page Application(SPA) 형태의 웹 사이트가 유행하기 시작하던 시점에 React, Vue같은 Client Side Rendering(CSR) 방식의 프레임워크들이 등장하였습니다. 하지만 CSR의 한계점으로 SEO가 자주 거론 되었고 이를 해결하기 위한 노력들이 필요했습니다.
 
 HTML에 지극히 적은 정보가 들어있는 것은 둘째치더라도 (구글봇은 CSR의 자바스크립트를 이해할수 있기 때문입니다), 첫 의미있는 페이지(First meaningful paint)를 보기 까지 너무 오랜 시간이 걸리는 것이 CSR의 문제였습니다. 위 문제점들을 해결하기 위해 Next.js나 Nuxt.js 같은 SSR을 도와주는 프레임워크들이 등장하였습니다.
 

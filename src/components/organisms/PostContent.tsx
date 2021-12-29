@@ -134,6 +134,14 @@ const MarkdownRenderer = styled.div`
     hr {
       margin: 80px 0;
     }
+
+    blockquote {
+      margin: 30px 0;
+      padding: 5px 15px;
+      border-left: 2px solid darkgreen;
+      font-weight: 300;
+      color: darkgreen;
+    }
   }
 `
 
