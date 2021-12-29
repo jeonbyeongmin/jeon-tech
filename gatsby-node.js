@@ -44,11 +44,12 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const queryAllMarkdownData = await graphql(
     `
       {
-        allMarkdownRemark(
+        posts: allMarkdownRemark(
           sort: {
             order: DESC
             fields: [frontmatter___date, frontmatter___title]
           }
+          filter: { fileAbsolutePath: { regex: "/(contents/posts)/" } }
         ) {
           edges {
             node {
@@ -90,5 +91,5 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // Generate Post Page And Passing Slug Props for Query
-  queryAllMarkdownData.data.allMarkdownRemark.edges.forEach(generatePostPage)
+  queryAllMarkdownData.data.posts.edges.forEach(generatePostPage)
 }
