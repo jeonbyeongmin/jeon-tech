@@ -30,6 +30,7 @@ const PostCardList: FunctionComponent<PostCardListProps> = ({
   posts,
 }) => {
   const { containerRef, postList } = useInfiniteScroll(selectedCategory, posts)
+
   return (
     <PostCardListWrapper ref={containerRef}>
       {postList.map(

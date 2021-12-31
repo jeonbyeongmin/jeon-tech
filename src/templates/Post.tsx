@@ -6,6 +6,8 @@ import { PostFrontmatterType } from 'types/PostItem.types'
 import Layout from './Layout'
 import PostContent from 'components/organisms/PostContent'
 import PostHeader from 'components/organisms/PostHeader'
+import PostCard from 'components/molecules/PostCard'
+import PostCardList from 'components/organisms/PostCardList'
 
 export type PostPageItemType = {
   node: {
