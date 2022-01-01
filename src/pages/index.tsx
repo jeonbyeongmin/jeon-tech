@@ -10,7 +10,6 @@ import CategoryList, {
 } from 'components/organisms/CategoryList'
 import PostCardList from 'components/organisms/PostCardList'
 import Layout from '../templates/Layout'
-import { useSiteMetadata } from 'hooks/use-site-metadata'
 
 type IndexPageProps = {
   location: {
@@ -40,15 +39,16 @@ type IndexPageProps = {
 const IndexPage: FunctionComponent<IndexPageProps> = ({
   location: { search },
   data: {
+    site: {
+      siteMetadata: { title, description, siteUrl },
+    },
     allMdx: { nodes },
     profile: {
-      childImageSharp: { gatsbyImageData: profileImage },
+      // childImageSharp: { gatsbyImageData: profileImage },
       publicURL: profileURL,
     },
   },
 }) => {
-  const { title, description, siteUrl } = useSiteMetadata()
-
   // 📌 URL에서 카테고리 파싱해서 selectedCategory를 정함
   const parsed: ParsedQuery<string> = queryString.parse(search)
   const selectedCategory: string =
@@ -97,6 +97,13 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
 
 export const getPostList = graphql`
   query getPostList {
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
+      }
+    }
     allMdx(sort: { fields: frontmatter___date, order: DESC }) {
       nodes {
         frontmatter {
