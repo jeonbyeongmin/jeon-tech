@@ -4,7 +4,6 @@ import GlobalStyle from '../../GlobalStyle'
 import Footer from 'components/organisms/Footer'
 import { Helmet } from 'react-helmet'
 import Header from 'components/organisms/Header'
-import { graphql, useStaticQuery } from 'gatsby'
 
 type LayoutProps = {
   url?: string
@@ -37,18 +36,6 @@ const Layout: FunctionComponent<LayoutProps> = ({
   image,
   children,
 }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      file(name: { eq: "logo-image" }) {
-        childImageSharp {
-          gatsbyImageData(width: 430, height: 120)
-        }
-        publicURL
-      }
-    }
-  `)
-  const { gatsbyImageData } = data.file.childImageSharp
-
   return (
     <Container>
       <Helmet>
@@ -82,7 +69,7 @@ const Layout: FunctionComponent<LayoutProps> = ({
 
         <html lang="ko" />
       </Helmet>
-      <Header logoImage={gatsbyImageData} />
+      <Header />
       <GlobalStyle />
       <HeaderBlank />
       <BodyContent>{children}</BodyContent>
