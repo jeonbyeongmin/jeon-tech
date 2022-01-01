@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
 
 type PostContentProps = {
-  html: string
+  body: string
 }
 
-const MarkdownRenderer = styled.div`
+const MarkdownStyle = styled.div`
   // Renderer Style
   display: flex;
   flex-direction: column;
@@ -145,10 +146,12 @@ const MarkdownRenderer = styled.div`
   }
 `
 
-const PostContent: FunctionComponent<PostContentProps> = ({ html }) => {
+const PostContent: FunctionComponent<PostContentProps> = ({ body }) => {
   return (
     <article itemScope itemType="http://schema.org/Article">
-      <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+      <MarkdownStyle>
+        <MDXRenderer>{body}</MDXRenderer>
+      </MarkdownStyle>
     </article>
   )
 }
