@@ -100,7 +100,7 @@ const Header: FunctionComponent = () => {
           <Icon
             className="mobile-menu"
             iconImage={hamburgerImg}
-            alter="hamburger icon"
+            alter="menu"
             onToggleClick={() => setModalToggle(prev => !prev)}
           />
         </HeaderInner>

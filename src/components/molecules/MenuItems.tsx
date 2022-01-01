@@ -66,7 +66,7 @@ const MenuItems: FunctionComponent<MenuItemsProps> = ({ className }) => {
     <MenuItemsWrapper className={className}>
       <Text>글</Text>
       <Text>소개</Text>
-      <ModeButton image={moonImg} alt="moon" />
+      <ModeButton image={moonImg} alt="darkmode" />
     </MenuItemsWrapper>
   )
 }
