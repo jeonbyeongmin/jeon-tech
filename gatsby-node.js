@@ -29,7 +29,7 @@ exports.onCreateWebpackConfig = ({ getConfig, actions }) => {
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `Mdx`) {
     const slug = createFilePath({ node, getNode })
 
     createNodeField({ node, name: 'slug', value: slug })
@@ -41,21 +41,20 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   const { createPage } = actions
 
   // Get All Markdown File For Paging
-  const queryAllMarkdownData = await graphql(
+  const result = await graphql(
     `
       {
-        posts: allMarkdownRemark(
+        posts: allMdx(
           sort: {
             order: DESC
             fields: [frontmatter___date, frontmatter___title]
           }
           filter: { fileAbsolutePath: { regex: "/(contents/posts)/" } }
         ) {
-          edges {
-            node {
-              fields {
-                slug
-              }
+          nodes {
+            id
+            fields {
+              slug
             }
           }
         }
@@ -64,7 +63,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   )
 
   // Handling GraphQL Query Error
-  if (queryAllMarkdownData.errors) {
+  if (result.errors) {
     reporter.panicOnBuild(`Error while running query`)
     return
   }
@@ -76,11 +75,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   )
 
   // Page Generating Function
-  const generatePostPage = ({
-    node: {
-      fields: { slug },
-    },
-  }) => {
+  const generatePostPage = ({ fields: { slug } }) => {
     const pageOptions = {
       path: slug,
       component: PostTemplateComponent,
@@ -91,5 +86,5 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   }
 
   // Generate Post Page And Passing Slug Props for Query
-  queryAllMarkdownData.data.posts.edges.forEach(generatePostPage)
+  result.data.posts.nodes.forEach(generatePostPage)
 }

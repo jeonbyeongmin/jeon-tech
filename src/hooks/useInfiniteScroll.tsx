@@ -20,15 +20,10 @@ const useInfiniteScroll = (
 
   const postListByCategory = useMemo<PostType[]>(
     () =>
-      posts.filter(
-        ({
-          node: {
-            frontmatter: { categories },
-          },
-        }: PostType) =>
-          selectedCategory !== 'All'
-            ? categories.includes(selectedCategory)
-            : true,
+      posts.filter(({ frontmatter: { categories } }: PostType) =>
+        selectedCategory !== 'All'
+          ? categories.includes(selectedCategory)
+          : true,
       ),
     [selectedCategory],
   )
