@@ -3,12 +3,10 @@ date: '2021-12-29'
 title: 'Gatsby의 특징과 동작과정'
 categories: ['Gatsby', 'SSG', 'Blog', 'Development']
 summary: '최근 제가 공부했던 것과 발생한 문제들을 기록하고 싶다는 생각이 들었던 참이라, 저만의 기술 블로그를 만들어 보며 Gatsby에 대해 알아가는 시간을 가져 보았습니다. 개발 3일차, 타이핑 속도가 현저히 낮아졌다고 생각한 지금 Gatsby에 대해 좀 더 자세히 알아봐야겠다는 생각이 들었습니다. (제가 이 글을 쓰고 있는 이유이기도 하죠) 그럼 Gatsby 공식 문서와 여러 자료들을 찾아보고 제 나름대로 정리해보며 Gatsby를 좀 더 잘 이해해보도록 하겠습니다! 😆'
-thumbnail: './gatsby.png'
+thumbnail: './images/gatsby.png'
 ---
 
 최근 제가 공부했던 것과 발생한 문제들을 기록하고 싶다는 생각이 들었던 참이라, 저만의 기술 블로그를 만들어 보며 Gatsby에 대해 알아가는 시간을 가져 보았습니다. 개발 3일차, 타이핑 속도가 현저히 낮아졌다고 생각한 지금 Gatsby에 대해 좀 더 자세히 알아봐야겠다는 생각이 들었습니다. (제가 이 글을 쓰고 있는 이유이기도 하죠) 그럼 Gatsby 공식 문서와 여러 자료들을 찾아보고 제 나름대로 정리해보며 Gatsby를 좀 더 잘 이해해보도록 하겠습니다! 😆
-
----
 
 ## Gatsby의 특징
 
@@ -26,28 +24,21 @@ React에 더 익숙했던 저는 React 기반 정적 사이트 생성기인 Next
 >
 > Jamstack은 Javascript, API, Markup로만 이뤄진 최신 웹 구성 방식을 말합니다. Jamstack으로 구성된 웹은 기존보더 더 빠르고, 더 안전합니다. Jamstack을 사용하면 마크업 요소들과 다양한 API를 이용하여 사전에 만들어 놓은 페이지를 CDN을 통해 열람할 수 있습니다.
 
-![jamstack](./jamstack.png)
-
-<br>
+![](./images/jamstack.png)
 
 ### Gatsby와 검색 엔진 최적화(SEO)
 
 블로그는 많은 사람들이 보기 위해서 SEO가 필수적이라고 생각했습니다. 결론적으로 Gatsby로 정적페이지를 만들어내면 SEO에 유리했죠. Jamstack을 이용한 정적페이지는 SSR을 생각할 이유가 없습니다. Build-time에 정적 HTML을 만들어 내기 때문에 첫 화면에 의미있는 HTML을 빠른 속도로 로드할 수 있기 때문입니다.
 
-<br>
-<br>
-
 ## Gatsby의 동작 과정
 
 이미지나 폰트, 자바스크립트, 스타일시트 등 HTML 문서는 다양한 리소스를 가지고 웹페이지를 만들어내기 때문에 이 리소스를 미리 다운로드 해야합니다. 불필요한 스트립트를 제거하거나 외부 CDN 폰트 대신 자체 호스트하는 것이 성능 최적화에 도움이 된다고 공식 문서에 적혀 있듯이 이 리소스를 줄이는 것이 굉장히 중요한 것이죠. 그렇기 때문에 이미지 크기를 줄이고 코드를 압축하는 등 대역폭을 아끼려고 하고 한번 다운받은 파일을 브라우저가 재사용하도록 캐쉬를 사용하기도 합니다. 그리고 개츠비도 이 웹 페이지 로딩 시간을 줄이기 위해서 다양한 노력들을 합니다.
 
-<br>
-
-![gatsby2](./gatsby2.png)
+![](./images/gatsby2.png)
 
 ### 이미지 플러그인
 
-`gatsby-plugin-image` 는 이미지 로딩 성능을 최적화하기 위해서 개츠비가 공식적으로 소개하는 플러그인입니다. 이미지를 가져올 때 리소스 혼잡을 피하기 위해서 이미지에 대해서 필수적이지 않은 작업을 나중으로 미루는 대신 이미지를 가져올 동안 placeholder 제공하는 방식입니다. 물론 이미지 파일 크기 자체도 최소화합니다. 한마디로 문서를 더 빨리 읽는 것이 이미지를 가져오는 것보다 더 중요하다는 철학인 것이죠.
+`gatsby-plugin-image`는 이미지 로딩 성능을 최적화하기 위해서 개츠비가 공식적으로 소개하는 플러그인입니다. 이미지를 가져올 때 리소스 혼잡을 피하기 위해서 이미지에 대해서 필수적이지 않은 작업을 나중으로 미루는 대신 이미지를 가져올 동안 placeholder 제공하는 방식입니다. 물론 이미지 파일 크기 자체도 최소화합니다. 한마디로 문서를 더 빨리 읽는 것이 이미지를 가져오는 것보다 더 중요하다는 철학인 것이죠.
 
 ### 코드분할
 
@@ -67,8 +58,12 @@ Prefetch는 유저가 다음에 방문할 것으로 예상되는 페이지의 �
 
 ## Source
 
-https://www.gatsbyjs.com/<br>
-https://jamstack.org/what-is-jamstack/<br>
-https://pks2974.medium.com/jam-stack-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-17dd5c34edf7<br>
-https://www.gatsbyjs.com/docs/how-code-splitting-works/<br>
-https://jeonghwan-kim.github.io/dev/2020/08/21/gatsby-prefetch.html<br>
+https://www.gatsbyjs.com/
+
+https://jamstack.org/what-is-jamstack/
+
+https://pks2974.medium.com/jam-stack-%EA%B0%9C%EB%85%90-%EC%A0%95%EB%A6%AC%ED%95%98%EA%B8%B0-17dd5c34edf7
+
+https://www.gatsbyjs.com/docs/how-code-splitting-works/
+
+https://jeonghwan-kim.github.io/dev/2020/08/21/gatsby-prefetch.html
