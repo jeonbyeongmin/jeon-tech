@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 import Text from 'components/atoms/Text'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 
 type MenuItemsProps = {
   className?: string
@@ -64,8 +64,13 @@ const MenuItems: FunctionComponent<MenuItemsProps> = ({ className }) => {
 
   return (
     <MenuItemsWrapper className={className}>
-      <Text>글</Text>
-      <Text>소개</Text>
+      <Link to="/">
+        <Text>글</Text>
+      </Link>
+      <Link to="/profile">
+        <Text>소개</Text>
+      </Link>
+
       <ModeButton image={moonImg} alt="darkmode" />
     </MenuItemsWrapper>
   )
