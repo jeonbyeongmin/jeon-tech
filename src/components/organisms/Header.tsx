@@ -9,8 +9,24 @@ import Icon from 'components/atoms/Icon'
 import MobileMenu from './MobileMenu'
 import MenuItems from 'components/molecules/MenuItems'
 
-type HeaderProps = {
-  logoImage: IGatsbyImageData
+type HeaderStaticQueryType = {
+  hamburger: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+
+  letterX: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+
+  logo: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
 }
 
 const HeaderWrapper = styled.header`
@@ -43,8 +59,8 @@ const HeaderInner = styled.div`
   margin: 0 auto;
 `
 
-const Header: FunctionComponent<HeaderProps> = ({ logoImage }) => {
-  const data = useStaticQuery(graphql`
+const Header: FunctionComponent = () => {
+  const data = useStaticQuery<HeaderStaticQueryType>(graphql`
     query {
       hamburger: file(name: { eq: "hamburger" }) {
         childImageSharp {
@@ -59,9 +75,17 @@ const Header: FunctionComponent<HeaderProps> = ({ logoImage }) => {
         }
         publicURL
       }
+
+      logo: file(name: { eq: "logo-image" }) {
+        childImageSharp {
+          gatsbyImageData(width: 430, height: 120)
+        }
+        publicURL
+      }
     }
   `)
 
+  const { gatsbyImageData: logo } = data.logo.childImageSharp
   const { gatsbyImageData: hamburgerImg } = data.hamburger.childImageSharp
   const { gatsbyImageData: letterXImg } = data.letterX.childImageSharp
 
@@ -71,7 +95,7 @@ const Header: FunctionComponent<HeaderProps> = ({ logoImage }) => {
     <>
       <HeaderWrapper>
         <HeaderInner>
-          <Logo logoImage={logoImage} alter="jeon.dev logo" />
+          <Logo logoImage={logo} alter="jeon.dev logo" />
           <MenuItems />
           <Icon
             className="mobile-menu"

@@ -1,12 +1,26 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 import Text from 'components/atoms/Text'
 import { graphql, useStaticQuery } from 'gatsby'
 
 type MenuItemsProps = {
   className?: string
+}
+
+type MenuItemsStaticQueryType = {
+  moon: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+
+  sun: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
 }
 
 const MenuItemsWrapper = styled.div`
@@ -27,7 +41,7 @@ const ModeButton = styled(GatsbyImage)`
 `
 
 const MenuItems: FunctionComponent<MenuItemsProps> = ({ className }) => {
-  const data = useStaticQuery(graphql`
+  const data = useStaticQuery<MenuItemsStaticQueryType>(graphql`
     query {
       moon: file(name: { eq: "moon" }) {
         childImageSharp {

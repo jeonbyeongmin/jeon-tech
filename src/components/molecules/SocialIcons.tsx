@@ -3,13 +3,32 @@ import styled from '@emotion/styled'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import Icon from 'components/atoms/Icon'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 const SocialIconsWrapper = styled.div`
   display: flex;
 `
 
+type SocialIconsStaticQueryType = {
+  insta: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+  github: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+  email: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+}
+
 const SocialIcons: FunctionComponent = () => {
-  const data = useStaticQuery(graphql`
+  const data = useStaticQuery<SocialIconsStaticQueryType>(graphql`
     query {
       insta: file(name: { eq: "instagram" }) {
         childImageSharp {
