@@ -15,6 +15,7 @@ module.exports = {
         allExtensions: true, // defaults to false
       },
     },
+    // `gatsby-plugin-graphql-codegen`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sitemap`,
