@@ -33,17 +33,9 @@ const PostCardList: FunctionComponent<PostCardListProps> = ({
 
   return (
     <PostCardListWrapper ref={containerRef}>
-      {postList.map(
-        ({
-          node: {
-            id,
-            fields: { slug },
-            frontmatter,
-          },
-        }: PostType) => (
-          <PostCard {...frontmatter} link={slug} key={id} />
-        ),
-      )}
+      {postList.map(({ id, slug, frontmatter }: PostType) => (
+        <PostCard {...frontmatter} link={slug} key={id} />
+      ))}
     </PostCardListWrapper>
   )
 }
