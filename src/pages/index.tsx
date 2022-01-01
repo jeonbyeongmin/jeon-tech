@@ -24,9 +24,10 @@ type IndexPageProps = {
         siteUrl: string
       }
     }
-    allMarkdownRemark: {
-      edges: PostType[]
+    allMdx: {
+      nodes: PostType[]
     }
+
     profile: {
       childImageSharp: {
         gatsbyImageData: IGatsbyImageData
@@ -39,7 +40,7 @@ type IndexPageProps = {
 const IndexPage: FunctionComponent<IndexPageProps> = ({
   location: { search },
   data: {
-    allMarkdownRemark: { edges },
+    allMdx: { nodes },
     profile: {
       childImageSharp: { gatsbyImageData: profileImage },
       publicURL: profileURL,
@@ -57,14 +58,10 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
 
   const categoryList = useMemo(
     () =>
-      edges.reduce(
+      nodes.reduce(
         (
           list: CategoryListProps['categoryList'],
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          }: PostType,
+          { frontmatter: { categories } }: PostType,
         ) => {
           categories.forEach(category => {
             if (list[category] === undefined) list[category] = 1
@@ -80,6 +77,8 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
     [],
   )
 
+  console.log(nodes)
+
   return (
     <Layout
       image={profileURL}
@@ -91,36 +90,31 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
-      <PostCardList selectedCategory={selectedCategory} posts={edges} />
+      <PostCardList selectedCategory={selectedCategory} posts={nodes} />
     </Layout>
   )
 }
 
 export const getPostList = graphql`
   query getPostList {
-    allMarkdownRemark(
-      sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
-    ) {
-      edges {
-        node {
-          id
-          fields {
-            slug
-          }
-          frontmatter {
-            title
-            summary
-            date(formatString: "YYYY.MM.DD.")
-            categories
-            thumbnail {
-              childImageSharp {
-                gatsbyImageData(width: 768, height: 400)
-              }
+    allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+      nodes {
+        frontmatter {
+          title
+          summary
+          date(formatString: "YYYY.MM.DD.")
+          categories
+          thumbnail {
+            childImageSharp {
+              gatsbyImageData(width: 768, height: 400)
             }
           }
         }
+        slug
+        id
       }
     }
+
     profile: file(name: { eq: "profile-image" }) {
       childImageSharp {
         gatsbyImageData(width: 120, height: 120)
