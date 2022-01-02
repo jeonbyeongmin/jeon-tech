@@ -35,10 +35,6 @@ const IconWrapper = styled.div`
       justify-content: center;
     }
   }
-
-  &.footer-social-icon {
-    margin-left: 20px;
-  }
 `
 
 const Icon: FunctionComponent<IconProps> = ({
