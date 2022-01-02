@@ -1,15 +1,14 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 type IconProps = {
-  iconImage: IGatsbyImageData
+  iconURL: string
   alter: string
   className?: string
   onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined
 }
 
-const IconImage = styled(GatsbyImage)`
+const IconImage = styled.img`
   width: 20px;
   cursor: pointer;
 
@@ -42,14 +41,14 @@ const IconWrapper = styled.div`
 `
 
 const Icon: FunctionComponent<IconProps> = ({
-  iconImage,
+  iconURL,
   alter,
   onToggleClick,
   className,
 }) => {
   return (
     <IconWrapper onClick={onToggleClick} className={className}>
-      <IconImage image={iconImage} alt={alter} className={className} />
+      <IconImage src={iconURL} alt={alter} className={className} />
     </IconWrapper>
   )
 }
