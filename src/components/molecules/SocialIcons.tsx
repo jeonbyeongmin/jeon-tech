@@ -9,6 +9,12 @@ const SocialIconsWrapper = styled.div`
   display: flex;
 `
 
+const SocialIconsGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+`
+
 type SocialIconsStaticQueryType = {
   insta: {
     childImageSharp: {
@@ -59,21 +65,30 @@ const SocialIcons: FunctionComponent = () => {
 
   return (
     <SocialIconsWrapper>
-      <Icon
-        className="footer-social-icon"
-        iconImage={instaImg}
-        alter="instagram icon"
-      />
-      <Icon
-        className="footer-social-icon"
-        iconImage={githubImg}
-        alter="instagram icon"
-      />
-      <Icon
-        className="footer-social-icon"
-        iconImage={emailImg}
-        alter="instagram icon"
-      />
+      <SocialIconsGrid>
+        <a
+          href="https://www.instagram.com/jeonbyeongm1n/?hl=ko"
+          target="_blank"
+        >
+          <Icon
+            className="social-icon"
+            iconImage={instaImg}
+            alter="instagram icon"
+          />
+        </a>
+        <a href="https://github.com/jeonbyeongmin" target="_blank">
+          <Icon
+            className="social-icon"
+            iconImage={githubImg}
+            alter="instagram icon"
+          />
+        </a>
+        <Icon
+          className="social-icon"
+          iconImage={emailImg}
+          alter="instagram icon"
+        />
+      </SocialIconsGrid>
     </SocialIconsWrapper>
   )
 }
