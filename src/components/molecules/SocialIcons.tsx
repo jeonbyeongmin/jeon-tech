@@ -1,9 +1,7 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { graphql, useStaticQuery } from 'gatsby'
-
 import Icon from 'components/atoms/Icon'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 const SocialIconsWrapper = styled.div`
   display: flex;
@@ -18,19 +16,13 @@ const SocialIconsGrid = styled.div`
 
 type SocialIconsStaticQueryType = {
   insta: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
+    publicURL: string
   }
   github: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
+    publicURL: string
   }
   email: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
+    publicURL: string
   }
 }
 
@@ -38,31 +30,20 @@ const SocialIcons: FunctionComponent = () => {
   const data = useStaticQuery<SocialIconsStaticQueryType>(graphql`
     query {
       insta: file(name: { eq: "instagram" }) {
-        childImageSharp {
-          gatsbyImageData(width: 20, height: 20)
-        }
         publicURL
       }
-
       github: file(name: { eq: "github" }) {
-        childImageSharp {
-          gatsbyImageData(width: 20, height: 20)
-        }
         publicURL
       }
-
       email: file(name: { eq: "email" }) {
-        childImageSharp {
-          gatsbyImageData(width: 20, height: 20)
-        }
         publicURL
       }
     }
   `)
 
-  const { gatsbyImageData: instaImg } = data.insta.childImageSharp
-  const { gatsbyImageData: githubImg } = data.github.childImageSharp
-  const { gatsbyImageData: emailImg } = data.email.childImageSharp
+  const { publicURL: instaImgURL } = data.insta
+  const { publicURL: githubImgURL } = data.github
+  const { publicURL: emailImgURL } = data.email
 
   return (
     <SocialIconsWrapper>
@@ -73,21 +54,21 @@ const SocialIcons: FunctionComponent = () => {
         >
           <Icon
             className="social-icon"
-            iconImage={instaImg}
+            iconURL={instaImgURL}
             alter="instagram icon"
           />
         </a>
         <a href="https://github.com/jeonbyeongmin" target="_blank">
           <Icon
             className="social-icon"
-            iconImage={githubImg}
-            alter="instagram icon"
+            iconURL={githubImgURL}
+            alter="github icon"
           />
         </a>
         <Icon
           className="social-icon"
-          iconImage={emailImg}
-          alter="instagram icon"
+          iconURL={emailImgURL}
+          alter="email icon"
         />
       </SocialIconsGrid>
     </SocialIconsWrapper>
