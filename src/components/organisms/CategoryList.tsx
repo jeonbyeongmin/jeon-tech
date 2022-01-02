@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 
 export type CategoryListProps = {
+  // currentTheme: string
   selectedCategory: string
   categoryList: {
     [key: string]: number
@@ -11,6 +12,7 @@ export type CategoryListProps = {
 
 type CategoryItemProps = {
   active: boolean
+  // currentTheme: string
 }
 
 type GatsbyLinkProps = {
@@ -39,14 +41,16 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   margin-right: 10px;
   margin-bottom: 10px;
   padding: 5px 20px;
-  background-color: ${({ active }) => (active ? 'lightgray' : '#ededed')};
+
   font-size: 18px;
   border-radius: 25px;
-  font-weight: ${({ active }) => (active ? '700' : '300')};
+  font-weight: ${({ active }) => (active ? '500' : '300')};
   cursor: pointer;
+  background-color: ${({ active }) => (active ? '#000000' : '#ededed')};
+  color: ${({ active }) => (active ? '#ffffff' : '#000000')};
 
   &:hover {
-    opacity: 0.8;
+    color: ${({ active }) => (active ? '#ffffff' : '#000000')};
   }
 
   &:last-of-type {
@@ -61,6 +65,7 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   }
 `
 const CategoryList: FunctionComponent<CategoryListProps> = ({
+  // currentTheme,
   selectedCategory,
   categoryList,
 }) => {
@@ -69,6 +74,7 @@ const CategoryList: FunctionComponent<CategoryListProps> = ({
       {Object.keys(categoryList).map(name => (
         <CategoryItem
           to={`/?category=${name}`}
+          // currentTheme={currentTheme}
           active={name === selectedCategory}
           key={name}
         >
