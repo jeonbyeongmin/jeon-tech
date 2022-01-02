@@ -1,25 +1,23 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 
 import Text from 'components/atoms/Text'
 import { graphql, Link, useStaticQuery } from 'gatsby'
+import { ThemeTogglerType } from 'types/Theme.types'
 
 type MenuItemsProps = {
   className?: string
+  currentTheme: string | undefined
+  themeToggler: ThemeTogglerType
 }
 
 type MenuItemsStaticQueryType = {
   moon: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
+    publicURL: string
   }
 
   sun: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
+    publicURL: string
   }
 }
 
@@ -32,7 +30,7 @@ const MenuItemsWrapper = styled.div`
     display: none;
   }
 `
-const ModeButton = styled(GatsbyImage)`
+const ModeButton = styled.img`
   width: 20px;
   height: 20px;
   margin-left: 30px;
@@ -40,27 +38,24 @@ const ModeButton = styled(GatsbyImage)`
   cursor: pointer;
 `
 
-const MenuItems: FunctionComponent<MenuItemsProps> = ({ className }) => {
+const MenuItems: FunctionComponent<MenuItemsProps> = ({
+  className,
+  currentTheme,
+  themeToggler,
+}) => {
   const data = useStaticQuery<MenuItemsStaticQueryType>(graphql`
     query {
       moon: file(name: { eq: "moon" }) {
-        childImageSharp {
-          gatsbyImageData(width: 20, height: 20)
-        }
         publicURL
       }
-
       sun: file(name: { eq: "sun" }) {
-        childImageSharp {
-          gatsbyImageData(width: 20, height: 20)
-        }
         publicURL
       }
     }
   `)
 
-  const { gatsbyImageData: moonImg } = data.moon.childImageSharp
-  //   const { gatsbyImageData: sunImg } = data.sun.childImageSharp
+  const { publicURL: moonImg } = data.moon
+  const { publicURL: sunImg } = data.sun
 
   return (
     <MenuItemsWrapper className={className}>
@@ -71,7 +66,11 @@ const MenuItems: FunctionComponent<MenuItemsProps> = ({ className }) => {
         <Text>소개</Text>
       </Link>
 
-      <ModeButton image={moonImg} alt="darkmode" />
+      <ModeButton
+        src={currentTheme === 'dark' ? sunImg : moonImg}
+        alt="darkmode"
+        onClick={themeToggler}
+      />
     </MenuItemsWrapper>
   )
 }
