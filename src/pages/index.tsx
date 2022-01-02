@@ -77,8 +77,6 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
     [],
   )
 
-  console.log(nodes)
-
   return (
     <Layout
       image={profileURL}
@@ -87,6 +85,7 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
       url={siteUrl}
     >
       <CategoryList
+        // currentTheme={currentTheme}
         selectedCategory={selectedCategory}
         categoryList={categoryList}
       />
