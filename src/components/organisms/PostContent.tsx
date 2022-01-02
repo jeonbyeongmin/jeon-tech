@@ -29,7 +29,7 @@ const MarkdownStyle = styled.div`
   h1,
   h2 {
     font-weight: 700;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
 
   h3 {
@@ -37,9 +37,12 @@ const MarkdownStyle = styled.div`
   }
 
   * + h1,
-  * + h2,
+  * + h2 {
+    margin-top: 100px;
+  }
+
   * + h3 {
-    margin-top: 40px;
+    margin-top: 50px;
   }
 
   hr + h1,
@@ -115,6 +118,15 @@ const MarkdownStyle = styled.div`
     line-height: 1.8;
     font-size: 14px;
     font-weight: 300;
+
+    * + h1,
+    * + h2 {
+      margin-top: 60px;
+    }
+
+    * + h3 {
+      margin-top: 30px;
+    }
 
     h1 {
       font-size: 23px;
