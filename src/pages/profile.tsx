@@ -75,6 +75,10 @@ const InfoTitle = styled.div`
 
 const InfoDescription = styled.div`
   margin-bottom: 50px;
+
+  @media (max-width: 767px) {
+    margin-bottom: 30px;
+  }
 `
 
 const ProfilePage: FunctionComponent<ProfilePageProps> = ({

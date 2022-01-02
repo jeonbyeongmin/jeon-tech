@@ -112,8 +112,8 @@ const MarkdownStyle = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     padding: 80px 20px;
-    line-height: 1.6;
-    font-size: 16px;
+    line-height: 1.8;
+    font-size: 14px;
     font-weight: 300;
 
     h1 {

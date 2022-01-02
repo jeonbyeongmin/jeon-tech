@@ -20,6 +20,10 @@ const IconImage = styled(GatsbyImage)`
       display: block;
     }
   }
+
+  @media (max-width: 768px) {
+    width: 16px;
+  }
 `
 
 const IconWrapper = styled.div`

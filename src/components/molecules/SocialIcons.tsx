@@ -7,6 +7,7 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 const SocialIconsWrapper = styled.div`
   display: flex;
+  padding: 0 6px;
 `
 
 const SocialIconsGrid = styled.div`
