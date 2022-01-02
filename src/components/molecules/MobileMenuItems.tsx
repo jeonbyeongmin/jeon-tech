@@ -2,6 +2,7 @@ import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 
 import Text from 'components/atoms/Text'
+import { Link } from 'gatsby'
 
 type MobileMenuItemsProps = {
   className?: string
@@ -19,8 +20,12 @@ const MobileMenuItems: FunctionComponent<MobileMenuItemsProps> = ({
 }) => {
   return (
     <MobileMenuItemsWrapper className={className}>
-      <Text className="mobile">글</Text>
-      <Text className="mobile">소개</Text>
+      <Link to="/">
+        <Text className="mobile">글</Text>
+      </Link>
+      <Link to="/profile">
+        <Text className="mobile">소개</Text>
+      </Link>
       <Text className="mobile">모드 변경하기</Text>
     </MobileMenuItemsWrapper>
   )
