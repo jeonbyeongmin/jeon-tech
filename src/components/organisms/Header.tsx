@@ -8,28 +8,45 @@ import Logo from 'components/atoms/Logo'
 import Icon from 'components/atoms/Icon'
 import MobileMenu from './MobileMenu'
 import MenuItems from 'components/molecules/MenuItems'
+import { ThemeTogglerType } from 'types/Theme.types'
+import { ThemeStyleProps } from 'types/Theme.types'
+
+type HeaderProps = {
+  currentTheme: string | undefined
+  themeToggler: ThemeTogglerType
+}
 
 type HeaderStaticQueryType = {
   hamburger: {
     childImageSharp: {
       gatsbyImageData: IGatsbyImageData
     }
+    publicURL: string
   }
 
   letterX: {
     childImageSharp: {
       gatsbyImageData: IGatsbyImageData
     }
+    publicURL: string
   }
 
   logo: {
     childImageSharp: {
       gatsbyImageData: IGatsbyImageData
     }
+    publicURL: string
+  }
+
+  darkLogo: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+    publicURL: string
   }
 }
 
-const HeaderWrapper = styled.header`
+const HeaderWrapper = styled.header<ThemeStyleProps>`
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -40,7 +57,7 @@ const HeaderWrapper = styled.header`
   text-align: center;
   line-height: 1.5;
   z-index: 1000;
-  background-color: #fff;
+  background-color: ${props => props.theme.backgroundColor};
 
   @media (max-width: 767px) {
     font-size: 13px;
@@ -59,60 +76,57 @@ const HeaderInner = styled.div`
   margin: 0 auto;
 `
 
-const Header: FunctionComponent = () => {
+const Header: FunctionComponent<HeaderProps> = ({
+  currentTheme,
+  themeToggler,
+}) => {
   const data = useStaticQuery<HeaderStaticQueryType>(graphql`
     query {
       hamburger: file(name: { eq: "hamburger" }) {
-        childImageSharp {
-          gatsbyImageData(width: 20, height: 20)
-        }
         publicURL
       }
-
       letterX: file(name: { eq: "letter-x" }) {
-        childImageSharp {
-          gatsbyImageData(width: 20, height: 20)
-        }
         publicURL
       }
-
       logo: file(name: { eq: "logo-image" }) {
-        childImageSharp {
-          gatsbyImageData(width: 430, height: 120)
-        }
+        publicURL
+      }
+      darkLogo: file(name: { eq: "dark-logo-image" }) {
         publicURL
       }
     }
   `)
 
-  const { gatsbyImageData: logo } = data.logo.childImageSharp
-  const { gatsbyImageData: hamburgerImg } = data.hamburger.childImageSharp
-  const { gatsbyImageData: letterXImg } = data.letterX.childImageSharp
+  const { publicURL: logoURL } = data.logo
+  const { publicURL: darkLogoURL } = data.darkLogo
+  const { publicURL: hamburgerURL } = data.hamburger
+  const { publicURL: letterXURL } = data.letterX
 
   const [modalToggle, setModalToggle] = useState<boolean>(false)
 
   return (
-    <>
-      <HeaderWrapper>
-        <HeaderInner>
-          <Logo logoImage={logo} alter="jeon.dev logo" />
-          <MenuItems />
-          <Icon
-            className="mobile-menu"
-            iconImage={hamburgerImg}
-            alter="menu"
-            onToggleClick={() => setModalToggle(prev => !prev)}
-          />
-        </HeaderInner>
-      </HeaderWrapper>
+    <HeaderWrapper>
+      <HeaderInner>
+        <Logo
+          logoURL={currentTheme === 'dark' ? darkLogoURL : logoURL}
+          alter="jeon.dev logo"
+        />
+        <MenuItems currentTheme={currentTheme} themeToggler={themeToggler} />
+        <Icon
+          className="mobile-menu"
+          iconURL={hamburgerURL}
+          alter="menu"
+          onToggleClick={() => setModalToggle(prev => !prev)}
+        />
+      </HeaderInner>
       {modalToggle ? (
         <MobileMenu
-          image={letterXImg}
+          imageURL={letterXURL}
           alter="letter x image"
           onToggleClick={() => setModalToggle(prev => !prev)}
         />
       ) : null}
-    </>
+    </HeaderWrapper>
   )
 }
 
