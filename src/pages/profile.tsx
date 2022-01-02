@@ -1,3 +1,4 @@
+import { keyframes } from '@emotion/react'
 import styled from '@emotion/styled'
 import SocialIcons from 'components/molecules/SocialIcons'
 import { graphql } from 'gatsby'
@@ -24,6 +25,17 @@ type ProfilePageProps = {
   }
 }
 
+const ProfilePageAppear = keyframes`
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+`
+
 const ProfileWrapper = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -34,8 +46,10 @@ const ProfileWrapper = styled.div`
 
   max-width: 1044px;
   margin: 0 auto;
-  padding: 50px 40px;
+  padding: 50px 30px;
   width: 100%;
+
+  animation: ${ProfilePageAppear} 0.7s ease-out forwards;
 
   @media (max-width: 767px) {
     grid-template-columns: 1fr;
@@ -56,7 +70,6 @@ const InfoWrapper = styled.div`
   justify-content: center;
 
   @media (max-width: 767px) {
-    font-size: 15px;
     font-weight: 300;
   }
 `
@@ -67,7 +80,7 @@ const InfoTitle = styled.div`
   margin-bottom: 30px;
 
   @media (max-width: 767px) {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
     margin-bottom: 15px;
   }
@@ -78,6 +91,7 @@ const InfoDescription = styled.div`
 
   @media (max-width: 767px) {
     margin-bottom: 30px;
+    font-size: 14px;
   }
 `
 
