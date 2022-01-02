@@ -1,12 +1,11 @@
 import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 import MobileMenuItems from 'components/molecules/MobileMenuItems'
 import Icon from 'components/atoms/Icon'
 
 type MobileMenuProps = {
-  image: IGatsbyImageData
+  imageURL: string
   alter: string
   onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined
 }
@@ -28,7 +27,7 @@ const IconPosition = styled.div`
 `
 
 const MobileMenu: FunctionComponent<MobileMenuProps> = ({
-  image,
+  imageURL,
   alter,
   onToggleClick,
 }) => {
@@ -38,7 +37,7 @@ const MobileMenu: FunctionComponent<MobileMenuProps> = ({
       <IconPosition>
         <Icon
           className="mobile-menu"
-          iconImage={image}
+          iconURL={imageURL}
           alter={alter}
           onToggleClick={onToggleClick}
         />
