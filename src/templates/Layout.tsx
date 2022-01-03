@@ -1,13 +1,14 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
-import GlobalStyle from '../../GlobalStyle'
+import GlobalStyle, { darkTheme, lightTheme } from '../../GlobalStyle'
 import Header from 'components/organisms/Header'
 import Footer from 'components/organisms/Footer'
 import { Helmet } from 'react-helmet'
-import useTheme from 'hooks/useTheme'
-import { ThemeProvider } from '@emotion/react'
-import { lightTheme, darkTheme } from '../../GlobalStyle'
 import { ThemeStyleProps } from 'types/Theme.types'
+import { useRecoilValue } from 'recoil'
+
+import { initialColorMode } from 'contexts/ThemeRecoil'
+import { ThemeProvider } from '@emotion/react'
 
 type LayoutProps = {
   url?: string
@@ -42,8 +43,8 @@ const Layout: FunctionComponent<LayoutProps> = ({
   image,
   children,
 }) => {
-  const { currentTheme, themeToggler } = useTheme()
-  const themeMode = currentTheme == 'dark' ? darkTheme : lightTheme
+  const colorMode = useRecoilValue(initialColorMode)
+  const themeMode = colorMode == 'dark' ? darkTheme : lightTheme
 
   return (
     <ThemeProvider theme={themeMode}>
@@ -83,7 +84,7 @@ const Layout: FunctionComponent<LayoutProps> = ({
           <html lang="ko" />
         </Helmet>
 
-        <Header currentTheme={currentTheme} themeToggler={themeToggler} />
+        <Header />
 
         <GlobalStyle />
         <HeaderBlank />

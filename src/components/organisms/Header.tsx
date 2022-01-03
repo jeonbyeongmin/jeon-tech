@@ -1,47 +1,30 @@
 import React, { FunctionComponent, useState } from 'react'
 import styled from '@emotion/styled'
 
-import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { useStaticQuery, graphql } from 'gatsby'
 
 import Logo from 'components/atoms/Logo'
 import Icon from 'components/atoms/Icon'
 import MobileMenu from './MobileMenu'
 import MenuItems from 'components/molecules/MenuItems'
-import { ThemeTogglerType } from 'types/Theme.types'
 import { ThemeStyleProps } from 'types/Theme.types'
-
-type HeaderProps = {
-  currentTheme: string | undefined
-  themeToggler: ThemeTogglerType
-}
+import { initialColorMode } from 'contexts/ThemeRecoil'
+import { useRecoilValue } from 'recoil'
 
 type HeaderStaticQueryType = {
   hamburger: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
     publicURL: string
   }
-
+  darkHamburger: {
+    publicURL: string
+  }
   letterX: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
     publicURL: string
   }
-
   logo: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
     publicURL: string
   }
-
   darkLogo: {
-    childImageSharp: {
-      gatsbyImageData: IGatsbyImageData
-    }
     publicURL: string
   }
 }
@@ -76,16 +59,13 @@ const HeaderInner = styled.div`
   margin: 0 auto;
 `
 
-const Header: FunctionComponent<HeaderProps> = ({
-  currentTheme,
-  themeToggler,
-}) => {
+const Header: FunctionComponent = () => {
   const data = useStaticQuery<HeaderStaticQueryType>(graphql`
     query {
       hamburger: file(name: { eq: "hamburger" }) {
         publicURL
       }
-      letterX: file(name: { eq: "letter-x" }) {
+      darkHamburger: file(name: { eq: "dark-hamburger" }) {
         publicURL
       }
       logo: file(name: { eq: "logo-image" }) {
@@ -100,31 +80,28 @@ const Header: FunctionComponent<HeaderProps> = ({
   const { publicURL: logoURL } = data.logo
   const { publicURL: darkLogoURL } = data.darkLogo
   const { publicURL: hamburgerURL } = data.hamburger
-  const { publicURL: letterXURL } = data.letterX
+  const { publicURL: darkHamburgerURL } = data.darkHamburger
 
   const [modalToggle, setModalToggle] = useState<boolean>(false)
+  const colorMode = useRecoilValue(initialColorMode)
 
   return (
     <HeaderWrapper>
       <HeaderInner>
         <Logo
-          logoURL={currentTheme === 'dark' ? darkLogoURL : logoURL}
+          logoURL={colorMode === 'dark' ? darkLogoURL : logoURL}
           alter="jeon.dev logo"
         />
-        <MenuItems currentTheme={currentTheme} themeToggler={themeToggler} />
+        <MenuItems />
         <Icon
           className="mobile-menu"
-          iconURL={hamburgerURL}
+          iconURL={colorMode === 'dark' ? darkHamburgerURL : hamburgerURL}
           alter="menu"
           onToggleClick={() => setModalToggle(prev => !prev)}
         />
       </HeaderInner>
       {modalToggle ? (
-        <MobileMenu
-          imageURL={letterXURL}
-          alter="letter x image"
-          onToggleClick={() => setModalToggle(prev => !prev)}
-        />
+        <MobileMenu onToggleClick={() => setModalToggle(prev => !prev)} />
       ) : null}
     </HeaderWrapper>
   )

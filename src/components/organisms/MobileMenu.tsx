@@ -3,42 +3,74 @@ import styled from '@emotion/styled'
 
 import MobileMenuItems from 'components/molecules/MobileMenuItems'
 import Icon from 'components/atoms/Icon'
+import { graphql, useStaticQuery } from 'gatsby'
+import { initialColorMode } from 'contexts/ThemeRecoil'
+import { useRecoilValue } from 'recoil'
 
 type MobileMenuProps = {
-  imageURL: string
-  alter: string
   onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined
 }
 
-const MobileMenuWrapper = styled.div`
+type MobileMenuWrapperProps = {
+  colorMode: string
+}
+
+type MobileMenuStaticQueryType = {
+  letterX: {
+    publicURL: string
+  }
+  darkLetterX: {
+    publicURL: string
+  }
+}
+
+const MobileMenuWrapper = styled(
+  ({ colorMode, ...props }: MobileMenuWrapperProps) => <div {...props} />,
+)`
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
-  background-color: white;
   z-index: 1001;
+
+  background-color: ${({ colorMode }) =>
+    colorMode === 'dark' ? '#000000' : '#ffffff'};
+
+  color: ${({ colorMode }) => (colorMode === 'dark' ? '#ffffff' : '#000000')};
 `
 
 const IconPosition = styled.div`
   position: fixed;
-  top: 10px;
+  top: 20px;
   right: 20px;
 `
 
-const MobileMenu: FunctionComponent<MobileMenuProps> = ({
-  imageURL,
-  alter,
-  onToggleClick,
-}) => {
+const MobileMenu: FunctionComponent<MobileMenuProps> = ({ onToggleClick }) => {
+  const data = useStaticQuery<MobileMenuStaticQueryType>(graphql`
+    query {
+      letterX: file(name: { eq: "letter-x" }) {
+        publicURL
+      }
+      darkLetterX: file(name: { eq: "dark-letter-x" }) {
+        publicURL
+      }
+    }
+  `)
+
+  const { publicURL: letterXURL } = data.letterX
+  const { publicURL: darkLetterXURL } = data.darkLetterX
+
+  const colorMode = useRecoilValue(initialColorMode)
+
   return (
-    <MobileMenuWrapper>
+    <MobileMenuWrapper colorMode={colorMode}>
       <MobileMenuItems />
       <IconPosition>
         <Icon
           className="mobile-menu"
-          iconURL={imageURL}
-          alter={alter}
+          iconURL={colorMode === 'dark' ? darkLetterXURL : letterXURL}
+          alter="letter x image"
           onToggleClick={onToggleClick}
         />
       </IconPosition>
