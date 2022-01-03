@@ -46,6 +46,9 @@ const Layout: FunctionComponent<LayoutProps> = ({
   const colorMode = useRecoilValue(initialColorMode)
   const themeMode = colorMode == 'dark' ? darkTheme : lightTheme
 
+  console.log(colorMode)
+  console.log(themeMode)
+
   return (
     <ThemeProvider theme={themeMode}>
       <Container>

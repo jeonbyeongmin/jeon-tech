@@ -30,8 +30,6 @@ const ModeButton: FunctionComponent = () => {
 
   const [colorMode, setColorMode] = useRecoilState(initialColorMode)
 
-  console.log(colorMode)
-
   const darkModeHandling = () => {
     setColorMode(colorMode === 'dark' ? 'light' : 'dark')
   }
