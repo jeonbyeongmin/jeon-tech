@@ -4,12 +4,13 @@ import styled from '@emotion/styled'
 type TextProps = {
   children: ReactNode
   className?: string
+  onToggleClick?: React.MouseEventHandler<HTMLImageElement>
 }
 
-const TextStyle = styled.div`
-  font-size: 16px;
+const TextWrapper = styled.div`
+  font-size: 18px;
   font-weight: 400;
-  margin-right: 20px;
+  margin-right: 30px;
   cursor: pointer;
 
   &:hover {
@@ -17,7 +18,7 @@ const TextStyle = styled.div`
   }
 
   &.mobile {
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 500;
     margin-bottom: 20px;
 
@@ -27,8 +28,16 @@ const TextStyle = styled.div`
   }
 `
 
-const Text: FunctionComponent<TextProps> = ({ children, className }) => {
-  return <TextStyle className={className}>{children}</TextStyle>
+const Text: FunctionComponent<TextProps> = ({
+  children,
+  className,
+  onToggleClick,
+}) => {
+  return (
+    <TextWrapper className={className} onClick={onToggleClick}>
+      {children}
+    </TextWrapper>
+  )
 }
 
 export default Text

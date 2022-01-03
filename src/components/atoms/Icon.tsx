@@ -26,16 +26,14 @@ const IconImage = styled.img`
 `
 
 const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   &.mobile-menu {
     display: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-
     @media (max-width: 768px) {
       display: flex;
-      align-items: center;
-      justify-content: center;
     }
   }
 `
