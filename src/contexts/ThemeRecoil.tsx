@@ -1,5 +1,11 @@
 import { atom } from 'recoil'
 
+declare global {
+  interface Window {
+    __theme: string
+  }
+}
+
 const getInitialColorMode = () => {
   if (typeof window !== 'undefined') {
     // const persistedColorPreference = window.localStorage.getItem('color-mode')
@@ -13,7 +19,8 @@ const getInitialColorMode = () => {
     //   ? persistedColorPreference
     //   : systemPreference
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    console.log(window.__theme)
+
     return window.__theme
   } else {
     return 'light'
