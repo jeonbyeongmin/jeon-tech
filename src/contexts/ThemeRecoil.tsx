@@ -23,6 +23,7 @@ const getInitialColorMode = () => {
 
     return window.__theme
   } else {
+    console.log('!')
     return 'light'
   }
 }
