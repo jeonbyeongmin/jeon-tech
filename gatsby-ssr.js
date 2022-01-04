@@ -43,7 +43,7 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
           window.__setPreferredTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
 
 
-          console.log(perferredTheme)
+          console.log(preferredTheme)
           console.log(darkQuery)
         })();
 
