@@ -31,7 +31,7 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
           window.__setPreferredTheme = (newTheme) => {
             setTheme(newTheme);
             try {
-              localStorage.setItem('theme', newTheme);
+              localStorage.setItem('color-mode', newTheme);
             } catch (err) {}
           }
 
