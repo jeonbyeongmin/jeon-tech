@@ -41,7 +41,7 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
             window.__setPreferredTheme(e.matches ? 'dark' : 'light')
           });
 
-          setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+          window.__setPreferredTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
         })();
 
         `,
