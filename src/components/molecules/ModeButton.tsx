@@ -32,6 +32,7 @@ const ModeButton: FunctionComponent = () => {
 
   const darkModeHandling = () => {
     setColorMode(colorMode === 'dark' ? 'light' : 'dark')
+    window.__setPreferredTheme(colorMode === 'dark' ? 'light' : 'dark')
   }
 
   useEffect(() => {
