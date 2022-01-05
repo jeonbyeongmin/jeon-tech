@@ -11,10 +11,6 @@ type MobileMenuProps = {
   onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined
 }
 
-type MobileMenuWrapperProps = {
-  colorMode: string
-}
-
 type MobileMenuStaticQueryType = {
   letterX: {
     publicURL: string
@@ -24,20 +20,15 @@ type MobileMenuStaticQueryType = {
   }
 }
 
-const MobileMenuWrapper = styled(
-  ({ colorMode, ...props }: MobileMenuWrapperProps) => <div {...props} />,
-)`
+const MobileMenuWrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
   z-index: 1001;
-
-  background-color: ${({ colorMode }) =>
-    colorMode === 'dark' ? '#000000' : '#ffffff'};
-
-  color: ${({ colorMode }) => (colorMode === 'dark' ? '#ffffff' : '#000000')};
+  background-color: var(--defaultBg);
+  color: var(--defaultColor);
 `
 
 const IconPosition = styled.div`
@@ -64,7 +55,7 @@ const MobileMenu: FunctionComponent<MobileMenuProps> = ({ onToggleClick }) => {
   const colorMode = useRecoilValue(initialColorMode)
 
   return (
-    <MobileMenuWrapper colorMode={colorMode}>
+    <MobileMenuWrapper>
       <MobileMenuItems />
       <IconPosition>
         <Icon

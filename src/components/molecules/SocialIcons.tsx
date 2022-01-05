@@ -49,26 +49,12 @@ const SocialIcons: FunctionComponent = () => {
       email: file(name: { eq: "email" }) {
         publicURL
       }
-      darkInsta: file(name: { eq: "dark-instagram" }) {
-        publicURL
-      }
-      darkGithub: file(name: { eq: "dark-github" }) {
-        publicURL
-      }
-      darkEmail: file(name: { eq: "dark-email" }) {
-        publicURL
-      }
     }
   `)
 
   const { publicURL: instaImgURL } = data.insta
   const { publicURL: githubImgURL } = data.github
   const { publicURL: emailImgURL } = data.email
-  const { publicURL: darkInstaImgURL } = data.darkInsta
-  const { publicURL: darkGithubImgURL } = data.darkGithub
-  const { publicURL: darkEmailImgURL } = data.darkEmail
-
-  const colorMode = useRecoilValue(initialColorMode)
 
   return (
     <SocialIconsWrapper>
@@ -79,20 +65,20 @@ const SocialIcons: FunctionComponent = () => {
         >
           <Icon
             className="social-icon"
-            iconURL={colorMode === 'dark' ? darkInstaImgURL : instaImgURL}
+            iconURL={instaImgURL}
             alter="instagram icon"
           />
         </a>
         <a href="https://github.com/jeonbyeongmin" target="_blank">
           <Icon
             className="social-icon"
-            iconURL={colorMode === 'dark' ? darkGithubImgURL : githubImgURL}
+            iconURL={githubImgURL}
             alter="github icon"
           />
         </a>
         <Icon
           className="social-icon"
-          iconURL={colorMode === 'dark' ? darkEmailImgURL : emailImgURL}
+          iconURL={emailImgURL}
           alter="email icon"
         />
       </SocialIconsGrid>

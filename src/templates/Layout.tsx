@@ -1,14 +1,9 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
-import GlobalStyle, { darkTheme, lightTheme } from '../../GlobalStyle'
+import GlobalStyle from '../../GlobalStyle'
 import Header from 'components/organisms/Header'
 import Footer from 'components/organisms/Footer'
 import { Helmet } from 'react-helmet'
-import { ThemeStyleProps } from 'types/Theme.types'
-import { useRecoilValue } from 'recoil'
-
-import { initialColorMode } from 'contexts/ThemeRecoil'
-import { ThemeProvider } from '@emotion/react'
 
 type LayoutProps = {
   url?: string
@@ -18,13 +13,13 @@ type LayoutProps = {
   children: ReactNode
 }
 
-const Container = styled.main<ThemeStyleProps>`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   position: relative;
-  background-color: ${props => props.theme.backgroundColor};
-  color: ${props => props.theme.fontColor};
+  background: var(--defaultBg);
+  color: var(--defaultColor);
 `
 
 const HeaderBlank = styled.div`
@@ -43,59 +38,48 @@ const Layout: FunctionComponent<LayoutProps> = ({
   image,
   children,
 }) => {
-  const colorMode = useRecoilValue(initialColorMode)
-  const themeMode = colorMode == 'dark' ? darkTheme : lightTheme
-
-  console.log(colorMode)
-  console.log(themeMode)
-
   return (
-    <ThemeProvider theme={themeMode}>
-      <Container>
-        <Helmet>
-          <title>{title}</title>
+    <Container>
+      <Helmet>
+        <title>{title}</title>
 
-          <meta name="description" content={description} />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
+        <meta name="description" content={description} />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta httpEquiv="Content-Type" content="text/html;charset=UTF-8" />
 
-          <meta property="og:type" content="website" />
-          <meta property="og:title" content={title} />
-          <meta property="og:description" content={description} />
-          <meta property="og:image" content={image} />
-          <meta property="og:url" content={url} />
-          <meta property="og:site_name" content={title} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={image} />
+        <meta property="og:url" content={url} />
+        <meta property="og:site_name" content={title} />
 
-          <meta name="twitter:card" content="summary" />
-          <meta name="twitter:title" content={title} />
-          <meta name="twitter:description" content={description} />
-          <meta name="twitter:image" content={image} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={image} />
 
-          <meta
-            name="google-site-verification"
-            content="P9xLRN_gkqMD5mNlmXDmTAdOJZOXWk-efvPfiABO338"
-          />
+        <meta
+          name="google-site-verification"
+          content="P9xLRN_gkqMD5mNlmXDmTAdOJZOXWk-efvPfiABO338"
+        />
 
-          <meta
-            name="naver-site-verification"
-            content="9ae8eb02f2eb031c1bb76597981ff0cca07e9d06"
-          />
+        <meta
+          name="naver-site-verification"
+          content="9ae8eb02f2eb031c1bb76597981ff0cca07e9d06"
+        />
 
-          <html lang="ko" />
-        </Helmet>
+        <html lang="ko" />
+      </Helmet>
 
-        <Header />
+      <Header />
 
-        <GlobalStyle />
-        <HeaderBlank />
-        <BodyContent>{children}</BodyContent>
+      <GlobalStyle />
+      <HeaderBlank />
+      <BodyContent>{children}</BodyContent>
 
-        <Footer />
-      </Container>
-    </ThemeProvider>
+      <Footer />
+    </Container>
   )
 }
 

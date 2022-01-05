@@ -1,8 +1,6 @@
 import React, { FunctionComponent, ReactNode } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import { useRecoilValue } from 'recoil'
-import { initialColorMode } from 'contexts/ThemeRecoil'
 
 export type CategoryListProps = {
   selectedCategory: string
@@ -13,7 +11,6 @@ export type CategoryListProps = {
 
 type CategoryItemProps = {
   active: boolean
-  colorMode: string
 }
 
 type GatsbyLinkProps = {
@@ -36,9 +33,9 @@ const CategoryListWrapper = styled.div`
   }
 `
 
-const CategoryItem = styled(
-  ({ active, colorMode, ...props }: GatsbyLinkProps) => <Link {...props} />,
-)<CategoryItemProps>`
+const CategoryItem = styled(({ ...props }: GatsbyLinkProps) => (
+  <Link {...props} />
+))<CategoryItemProps>`
   margin-right: 10px;
   margin-bottom: 10px;
   padding: 5px 20px;
@@ -47,33 +44,14 @@ const CategoryItem = styled(
   border-radius: 25px;
   font-weight: ${({ active }) => (active ? '500' : '300')};
   cursor: pointer;
-  background-color: ${({ active, colorMode }) =>
-    colorMode === 'dark'
-      ? active
-        ? '#ffffff'
-        : '#333333'
-      : active
-      ? '#000000'
-      : '#e5e5e5'};
-
-  color: ${({ active, colorMode }) =>
-    colorMode === 'dark'
-      ? active
-        ? '#000000'
-        : '#ffffff'
-      : active
-      ? '#ffffff'
-      : '#000000'};
+  background-color: ${({ active }) =>
+    active ? 'var(--cateBgActive)' : 'var(--cateBgDefault)'};
+  color: ${({ active }) =>
+    active ? 'var(--cateColorActive)' : 'var(--cateColorDefault)'};
 
   &:hover {
-    color: ${({ active, colorMode }) =>
-      colorMode === 'dark'
-        ? active
-          ? '#000000'
-          : '#ffffff'
-        : active
-        ? '#ffffff'
-        : '#000000'};
+    color: ${({ active }) =>
+      active ? 'var(--cateColorActive)' : 'var(--cateColorDefault)'};
   }
 
   &:last-of-type {
@@ -91,14 +69,11 @@ const CategoryList: FunctionComponent<CategoryListProps> = ({
   selectedCategory,
   categoryList,
 }) => {
-  const colorMode = useRecoilValue(initialColorMode)
-
   return (
     <CategoryListWrapper>
       {Object.keys(categoryList).map(name => (
         <CategoryItem
           to={`/?category=${name}`}
-          colorMode={colorMode}
           active={name === selectedCategory}
           key={name}
         >

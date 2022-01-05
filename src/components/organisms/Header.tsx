@@ -7,7 +7,6 @@ import Logo from 'components/atoms/Logo'
 import Icon from 'components/atoms/Icon'
 import MobileMenu from './MobileMenu'
 import MenuItems from 'components/molecules/MenuItems'
-import { ThemeStyleProps } from 'types/Theme.types'
 import { initialColorMode } from 'contexts/ThemeRecoil'
 import { useRecoilValue } from 'recoil'
 
@@ -29,7 +28,7 @@ type HeaderStaticQueryType = {
   }
 }
 
-const HeaderWrapper = styled.header<ThemeStyleProps>`
+const HeaderWrapper = styled.header`
   position: fixed;
   display: flex;
   flex-direction: row;
@@ -40,7 +39,8 @@ const HeaderWrapper = styled.header<ThemeStyleProps>`
   text-align: center;
   line-height: 1.5;
   z-index: 1000;
-  background-color: ${props => props.theme.backgroundColor};
+  background: var(--defaultBg);
+  color: var(--defaultColor);
 
   @media (max-width: 767px) {
     font-size: 13px;
@@ -71,14 +71,10 @@ const Header: FunctionComponent = () => {
       logo: file(name: { eq: "logo-image" }) {
         publicURL
       }
-      darkLogo: file(name: { eq: "dark-logo-image" }) {
-        publicURL
-      }
     }
   `)
 
   const { publicURL: logoURL } = data.logo
-  const { publicURL: darkLogoURL } = data.darkLogo
   const { publicURL: hamburgerURL } = data.hamburger
   const { publicURL: darkHamburgerURL } = data.darkHamburger
 
@@ -88,10 +84,7 @@ const Header: FunctionComponent = () => {
   return (
     <HeaderWrapper>
       <HeaderInner>
-        <Logo
-          logoURL={colorMode === 'dark' ? darkLogoURL : logoURL}
-          alter="jeon.dev logo"
-        />
+        <Logo logoURL={logoURL} alter="jeon.dev logo" />
         <MenuItems />
         <Icon
           className="mobile-menu"

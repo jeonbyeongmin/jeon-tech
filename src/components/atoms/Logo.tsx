@@ -10,6 +10,7 @@ type LogoProps = {
 
 const LogoImage = styled.img`
   width: 108px;
+  filter: var(--imageFilter);
 
   @media (max-width: 768px) {
     width: 80px;

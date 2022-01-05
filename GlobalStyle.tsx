@@ -21,6 +21,26 @@ const defaultStyle = css`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+
+    &.dark {
+      --defaultBg: #000000;
+      --defaultColor: #ffffff;
+      --cateBgActive: #ffffff;
+      --cateColorActive: #000000;
+      --cateBgDefault: #333333;
+      --cateColorDefault: #ffffff;
+      --imageFilter: invert();
+    }
+
+    &.light {
+      --defaultBg: #ffffff;
+      --defaultColor: #000000;
+      --cateBgActive: #000000;
+      --cateColorActive: #ffffff;
+      --cateBgDefault: #e5e5e5;
+      --cateColorDefault: #000000;
+      --imageFilter: opacity(1);
+    }
   }
 
   a,

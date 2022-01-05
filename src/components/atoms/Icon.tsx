@@ -10,6 +10,7 @@ type IconProps = {
 
 const IconImage = styled.img`
   width: 20px;
+  filter: var(--imageFilter);
   cursor: pointer;
 
   &.mobile-menu {
@@ -18,6 +19,10 @@ const IconImage = styled.img`
     @media (max-width: 768px) {
       display: block;
     }
+  }
+
+  &.bulb {
+    width: 23px;
   }
 
   @media (max-width: 768px) {

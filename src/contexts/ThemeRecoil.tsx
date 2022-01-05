@@ -3,24 +3,12 @@ import { atom } from 'recoil'
 declare global {
   interface Window {
     __theme: string
+    __setPreferredTheme(colorMode: string): void
   }
 }
 
 const getInitialColorMode = () => {
   if (typeof window !== 'undefined') {
-    // const persistedColorPreference = window.localStorage.getItem('color-mode')
-
-    // const systemPreference = window.matchMedia('(prefers-color-scheme: dark)')
-    //   .matches
-    //   ? 'dark'
-    //   : 'light'
-
-    // return persistedColorPreference
-    //   ? persistedColorPreference
-    //   : systemPreference
-
-    console.log(window.__theme)
-
     return window.__theme
   } else {
     return 'light'

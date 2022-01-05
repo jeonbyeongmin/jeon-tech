@@ -5,10 +5,7 @@ import { initialColorMode } from 'contexts/ThemeRecoil'
 import Icon from 'components/atoms/Icon'
 
 type MenuItemsStaticQueryType = {
-  moon: {
-    publicURL: string
-  }
-  sun: {
+  bulb: {
     publicURL: string
   }
 }
@@ -16,34 +13,29 @@ type MenuItemsStaticQueryType = {
 const ModeButton: FunctionComponent = () => {
   const data = useStaticQuery<MenuItemsStaticQueryType>(graphql`
     query {
-      moon: file(name: { eq: "moon" }) {
-        publicURL
-      }
-      sun: file(name: { eq: "sun" }) {
+      bulb: file(name: { eq: "bulb" }) {
         publicURL
       }
     }
   `)
 
-  const { publicURL: moonImg } = data.moon
-  const { publicURL: sunImg } = data.sun
+  const { publicURL: bulbImg } = data.bulb
 
   const [colorMode, setColorMode] = useRecoilState(initialColorMode)
 
   const darkModeHandling = () => {
     setColorMode(colorMode === 'dark' ? 'light' : 'dark')
-    window.__setPreferredTheme(colorMode === 'dark' ? 'light' : 'dark')
   }
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', colorMode)
-    window.localStorage.setItem('color-mode', colorMode)
+    window.__setPreferredTheme(colorMode)
   }, [colorMode])
 
   return (
     <Icon
-      iconURL={colorMode === 'dark' ? sunImg : moonImg}
+      iconURL={bulbImg}
       alter="darkmode"
+      className="bulb"
       onToggleClick={darkModeHandling}
     />
   )
