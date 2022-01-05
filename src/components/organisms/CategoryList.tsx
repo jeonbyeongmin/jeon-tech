@@ -33,7 +33,7 @@ const CategoryListWrapper = styled.div`
   }
 `
 
-const CategoryItem = styled(({ ...props }: GatsbyLinkProps) => (
+const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   <Link {...props} />
 ))<CategoryItemProps>`
   margin-right: 10px;
