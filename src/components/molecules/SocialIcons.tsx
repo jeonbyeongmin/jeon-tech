@@ -2,8 +2,6 @@ import React, { FunctionComponent } from 'react'
 import styled from '@emotion/styled'
 import { graphql, useStaticQuery } from 'gatsby'
 import Icon from 'components/atoms/Icon'
-import { initialColorMode } from 'contexts/ThemeRecoil'
-import { useRecoilValue } from 'recoil'
 
 const SocialIconsWrapper = styled.div`
   display: flex;
@@ -24,15 +22,6 @@ type SocialIconsStaticQueryType = {
     publicURL: string
   }
   email: {
-    publicURL: string
-  }
-  darkInsta: {
-    publicURL: string
-  }
-  darkGithub: {
-    publicURL: string
-  }
-  darkEmail: {
     publicURL: string
   }
 }

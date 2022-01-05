@@ -1,12 +1,17 @@
-import React, { FunctionComponent, useEffect } from 'react'
+import React, { FunctionComponent, useEffect, useState } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import { useRecoilState } from 'recoil'
-import { initialColorMode } from 'contexts/ThemeRecoil'
 import Icon from 'components/atoms/Icon'
 
 type MenuItemsStaticQueryType = {
   bulb: {
     publicURL: string
+  }
+}
+
+declare global {
+  interface Window {
+    __theme: string
+    __setPreferredTheme(colorMode: string): void
   }
 }
 
@@ -21,7 +26,15 @@ const ModeButton: FunctionComponent = () => {
 
   const { publicURL: bulbImg } = data.bulb
 
-  const [colorMode, setColorMode] = useRecoilState(initialColorMode)
+  const getInitialColorMode = () => {
+    if (typeof window !== 'undefined') {
+      return window.__theme
+    } else {
+      return 'light'
+    }
+  }
+
+  const [colorMode, setColorMode] = useState(getInitialColorMode())
 
   const darkModeHandling = () => {
     setColorMode(colorMode === 'dark' ? 'light' : 'dark')

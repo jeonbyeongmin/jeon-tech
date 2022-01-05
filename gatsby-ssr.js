@@ -1,5 +1,4 @@
 import React from 'react'
-import { RecoilRoot } from 'recoil'
 
 export const onRenderBody = ({ setPreBodyComponents }) => {
   setPreBodyComponents([
@@ -39,8 +38,4 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
       },
     }),
   ])
-}
-
-export const wrapRootElement = ({ element, props }) => {
-  return <RecoilRoot {...props}>{element}</RecoilRoot>
 }

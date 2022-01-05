@@ -17,16 +17,10 @@ const LogoImage = styled.img`
   }
 `
 
-const LogoWrapper = styled.div`
-  /* padding: 30px; */
-`
-
 const Logo: FunctionComponent<LogoProps> = ({ logoURL, alter, className }) => {
   return (
     <Link to="/">
-      <LogoWrapper className={className}>
-        <LogoImage src={logoURL} alt={alter} className={className} />
-      </LogoWrapper>
+      <LogoImage src={logoURL} alt={alter} className={className} />
     </Link>
   )
 }
