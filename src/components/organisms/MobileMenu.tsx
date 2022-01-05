@@ -4,8 +4,6 @@ import styled from '@emotion/styled'
 import MobileMenuItems from 'components/molecules/MobileMenuItems'
 import Icon from 'components/atoms/Icon'
 import { graphql, useStaticQuery } from 'gatsby'
-import { initialColorMode } from 'contexts/ThemeRecoil'
-import { useRecoilValue } from 'recoil'
 
 type MobileMenuProps = {
   onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined
@@ -13,9 +11,6 @@ type MobileMenuProps = {
 
 type MobileMenuStaticQueryType = {
   letterX: {
-    publicURL: string
-  }
-  darkLetterX: {
     publicURL: string
   }
 }
@@ -43,16 +38,10 @@ const MobileMenu: FunctionComponent<MobileMenuProps> = ({ onToggleClick }) => {
       letterX: file(name: { eq: "letter-x" }) {
         publicURL
       }
-      darkLetterX: file(name: { eq: "dark-letter-x" }) {
-        publicURL
-      }
     }
   `)
 
   const { publicURL: letterXURL } = data.letterX
-  const { publicURL: darkLetterXURL } = data.darkLetterX
-
-  const colorMode = useRecoilValue(initialColorMode)
 
   return (
     <MobileMenuWrapper>
@@ -60,7 +49,7 @@ const MobileMenu: FunctionComponent<MobileMenuProps> = ({ onToggleClick }) => {
       <IconPosition>
         <Icon
           className="mobile-menu"
-          iconURL={colorMode === 'dark' ? darkLetterXURL : letterXURL}
+          iconURL={letterXURL}
           alter="letter x image"
           onToggleClick={onToggleClick}
         />

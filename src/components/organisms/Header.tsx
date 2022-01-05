@@ -7,23 +7,12 @@ import Logo from 'components/atoms/Logo'
 import Icon from 'components/atoms/Icon'
 import MobileMenu from './MobileMenu'
 import MenuItems from 'components/molecules/MenuItems'
-import { initialColorMode } from 'contexts/ThemeRecoil'
-import { useRecoilValue } from 'recoil'
 
 type HeaderStaticQueryType = {
   hamburger: {
     publicURL: string
   }
-  darkHamburger: {
-    publicURL: string
-  }
-  letterX: {
-    publicURL: string
-  }
   logo: {
-    publicURL: string
-  }
-  darkLogo: {
     publicURL: string
   }
 }
@@ -65,9 +54,6 @@ const Header: FunctionComponent = () => {
       hamburger: file(name: { eq: "hamburger" }) {
         publicURL
       }
-      darkHamburger: file(name: { eq: "dark-hamburger" }) {
-        publicURL
-      }
       logo: file(name: { eq: "logo-image" }) {
         publicURL
       }
@@ -76,10 +62,8 @@ const Header: FunctionComponent = () => {
 
   const { publicURL: logoURL } = data.logo
   const { publicURL: hamburgerURL } = data.hamburger
-  const { publicURL: darkHamburgerURL } = data.darkHamburger
 
   const [modalToggle, setModalToggle] = useState<boolean>(false)
-  const colorMode = useRecoilValue(initialColorMode)
 
   return (
     <HeaderWrapper>
@@ -88,7 +72,7 @@ const Header: FunctionComponent = () => {
         <MenuItems />
         <Icon
           className="mobile-menu"
-          iconURL={colorMode === 'dark' ? darkHamburgerURL : hamburgerURL}
+          iconURL={hamburgerURL}
           alter="menu"
           onToggleClick={() => setModalToggle(prev => !prev)}
         />
