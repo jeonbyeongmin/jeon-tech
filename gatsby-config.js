@@ -4,7 +4,6 @@ module.exports = {
     description: `📌 내가 만들고 내가 쓰는 기술 블로그`,
     author: `Byeongmin Jeon`,
     siteUrl: `https://jeondev.gatsbyjs.io`, // 변경 예정
-    logo: `./static/logo-image.png`,
   },
   plugins: [
     {

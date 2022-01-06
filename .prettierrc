@@ -1,12 +1,19 @@
 {
-  "printWidth": 80,
+  "parser": "typescript",
+  "singleQuote": true,
+  "printWidth": 110,
   "tabWidth": 2,
   "useTabs": false,
-  "semi": false,
-  "singleQuote": true,
+  "semi": true,
   "quoteProps": "as-needed",
+  "jsxSingleQuote": true,
   "trailingComma": "all",
+  "arrowParens": "always",
+  "endOfLine": "auto",
   "bracketSpacing": true,
-  "arrowParens": "avoid",
-  "endOfLine": "lf"
+  "jsxBracketSameLine": false,
+  "requirePragma": false,
+  "insertPragma": false,
+  "proseWrap": "preserve",
+  "vueIndentScriptAndStyle": false
 }
