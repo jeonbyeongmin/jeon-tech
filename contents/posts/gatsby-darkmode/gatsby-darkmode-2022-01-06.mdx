@@ -1,0 +1,155 @@
+---
+date: '2022-01-06'
+title: 'Gatsby로 다크모드를 구현해보았다'
+categories: ['Gatsby', 'Blog', 'Dev']
+summary: '며칠동안 여러 삽질을 한 끝에 제 블로그에는 다크 모드를 위해서 상태관리 라이브러리를 사용하지 않기로 하였습니다. 다만 다른 방법을 통해 다크 모드를 구현하였는데, 구현하면서 느낀점과 삽질 과정을 기록하고자 합니다.'
+thumbnail: './images/darkmode.png'
+---
+
+며칠동안 여러 삽질을 한 끝에 제 블로그에는 다크 모드를 위해서 상태관리 라이브러리를 사용하지 않기로 하였습니다. 다만 다른 방법을 통해 다크 모드를 구현하였는데, 구현하면서 느낀점과 삽질 과정을 기록하고자 합니다.
+
+<hr />
+
+## 어떻게 다크모드를 구현할까?
+
+<br />
+
+> #### 다크모드 요구사항
+> 1. localstorage 에 테마에 대한 데이터가 없다면 prefers-color-scheme 미디어 쿼리를 이용하여 사용자의 시스템 모드를 적용합니다.
+> 2. 재방문시 localstorage 의 값으로 모드를 적용합니다.
+> 3. 토글을 이용하여 현재 테마를 바꿀 수 있어야 하고 localstorage 값을 변경하여 다음 방문시 테마를 결정하도록 한다.
+
+처음에 다크모드를 위해서는 상태관리 라이브러리로 recoil을 선택하였습니다. 상태관리 라이브러리는 일반적으로 리덕스를 사용하지만 제 블로그의 규모가 크지도 않았고 recoil이 간단하였기에 제격이라고 생각했습니다.
+
+
+### 1. 'window' is not defined error
+
+develop 환경에서 구현을 완료하고 build를 하였는데 에러가 발생하였습니다. 그 이유를 찾아보니 브러우저 runtime에서 돌아가는 develop 환경에서는 브라우저 API를 사용할 수 있었지만 buildtime은 nodejs 서버에서 브라우저에 전달할 파일로 컴파일 하기 때문에 브라우저 API를 사용할 수 없다느 것입니다. 이 에러는 아래와 같이 비교적 간단하게 해결할 수 있었습니다. (리액트에서는 useEffect 안에 코드를 넣는 방법도 있습니다.)
+
+```javascript
+let theme;
+
+if (typeof window !== 'undefined') {
+  theme = window.matchMedia('(prefers-color-scheme: dark)').matches
+    ? 'dark'
+    : 'light';
+}
+```
+
+### 2. 치명적인 버그 발생
+
+잘 돌아가는 듯 했지만 완성된 코드는 치명적인 버그가 있었습니다. localstorage 에 dark 값이 설정되어 있었다면 default 값인 light로 설정되었다가 페이지를 이동해야 dark 모드가 적용되는 것이었죠. 이것은 사용자 경험을 고려했을 때 다크모드를 지원하지 않는 것만 못하다 생각하였고 이를 해결해야 했습니다.
+
+typeof 조건문을 추가하였기 때문에 발생하는 문제인 것 같아 console.log 을 찍어보았지만 localstorage 값을 문제없이 상태값에 저장하여 dark 라고 잘 나왔습니다.. 이제까지 console.log 는 저에게 거짓말을 한 적이 없었기 때문에 굉장히 당황스러웠던 순간이었습니다.
+
+~~이 문제를 해결하는 과정에서 Gatsby와 React에 대해 제대로 이해하고 있지 않았던 저는 원인 분석을 위해서 상태관리 라이브러리를 recoil에서 Context API로 교체해보기도 하고 스타일리의 문제인가 싶어 emotion의 문서 등 관련도 없는 대량의 문서를 찾아보느라 머리가 터질 지경이었습니다.~~
+
+## 무엇이 문제였나?
+
+결국 이 문제는 React Hydration 개념을 알아야 했습니다. Gatsby는 빌드 결과물로 정적 HTML을 만들고 이를 React application 처럼 동작하게 만들기 위해서 렌더링 이후 hydration 하여 자바스크립트를 빌드하는 방식을 취합니다.
+
+console.log 는 클라이언트에서 실행되고 console.log 가 실행이 될 시점엔 이미 첫 페이지가 렌더링되어 있고 hydration까지 진행되어 localstorage 값은 잘 가져온 상태였기 때문이라 추측할 수 있습니다.
+
+이 문제는 다양한 방법으로 해결할 수 있을 것이라 생각합니다. 많은 사람들은 이 문제를 테마 결정 단계를 렌더링 이전에 놓는 방식으로 해결하고 있었습니다. 브라우저의 렌더링 엔진이 동작하는 과정은 다음과 같습니다.
+
+> 1. DOM 트리 구축을 위한 HTML 파싱
+> 2. 렌더 트리 구축
+> 3. 렌더 트리 배치
+> 4. 렌더 트리 그리기
+
+그렇다면 우리는 렌더링 엔진이 DOM 트리를 만들기 전에 HTML에 미리 테마를 결정해야 합니다. 어떻게 해결할 수 있을까요?
+
+## 해결 방법
+
+gatsby-ssr.js 파일에서 Gatsby에서 제공하는 API를 사용하여 빌드 시에 생성될 HTML에 미리 적용될 테마를 결정해줄 수 있습니다. 원리도 그다지 어렵지 않습니다. 먼저 브라우저가 파싱 도중 script 태그를 만났을 때 어떻게 되는지 이해하는 것이 중요합니다.
+
+### 1. HTML 파싱 중에 script 태그를 만나면?
+
+브라우저가 html을 파싱할 때 script 태그를 만나면 일반적으로 렌더를 중단하고 script를 다운받습니다. 이는 script가 DOM에 영향을 줄 수 있기 때문이죠. 그래서 보통 script 태그는 body 맨 끝에 위치 시킵니다. script를 다운받느라 렌더링을 멈추면 아무래도 사용자 경험에 좋지 않기 때문이겠죠.
+
+### 2. 그렇다면 body 맨 앞에 script를 만들자!
+
+body 맨 앞에 script를 작성해둘 수 있다면 어떨까요? 그리고 이 안에 body에 class를 부여하는 즉시 실행 함수를 작성한다면 미리 적용될 테마를 결정할 수 있게 하는 것이죠. 당연히 이때는 런타임이기 때문에 window 와 같은 브라우저 API도 사용할 수 있습니다.
+
+### 3. gatsby-ssr.js
+
+개츠비는 gatsby-ssr.js 에서 사용할 수 있는 API를 몇 개 지원합니다. 그 중 하나가 setPreBodyComponents 입니다. 말 그대로 body 앞에서 뭔가를 해줄 수 있게 해주는 API 입니다. 우리는 아래처럼 작성하여 body에 클래스 이름을 부여하고 window.\__theme에 현재 테마를 저장하고 window.\__setPreferredTheme 에 테마를 바꾸는 함수를 저장해둘 수 있습니다. 그래서 상태 관리 라이브러리가 있을 필요가 없다는 느낀 것입니다. 여기서 이미 테마의 상태를 저장해두는 변수를 만들었으니까요.
+
+```javascript
+export const onRenderBody = ({ setPreBodyComponents }) => {
+  setPreBodyComponents([
+    React.createElement('script', {
+      key: 0,
+      dangerouslySetInnerHTML: {
+        __html: `
+        (() => {
+
+          let preferredTheme;
+          try {
+            preferredTheme = localStorage.getItem('color-mode');
+          } catch (err) { }
+
+          const setTheme = (newTheme) => {
+            window.__theme = newTheme;
+            preferredTheme = newTheme;
+            document.body.className = newTheme;
+          }
+
+          window.__setPreferredTheme = (newTheme) => {
+            setTheme(newTheme);
+            try {
+              localStorage.setItem('color-mode', newTheme);
+            } catch (err) {}
+          }
+
+          let darkQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+          setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'));
+        })();
+        `,
+      },
+    }),
+  ])
+}
+```
+
+이 방법을 쓴다면 첫 렌더링 속도는 감소하겠지만, 사용자 경험이 줄어들 정도의 차이도 아닐뿐더러 다른 개발자가 보아도 상당히 직관적이라고 생각했습니다. 그래서 많이들 사용하는 것이겠죠.
+
+### 4. CSS custom property
+
+아직 끝난 것이 아닙니다. body에 클래스 이름을 부여하긴 했지만 다른 컴포넌트에서 이것을 어떻게 알아차리고 스타일링 할 수 있을까요? 이것은 CSS custom property를 이용하여 해결할 수 있었습니다. 다행히도 emotion에서도 사용할 수 있었고 globalStyle을 담당하는 파일에서 다음과 같은 방식으로 모드를 나누고 각 컴포넌트에서 해당 변수를 사용하여 테마를 적용할 수 있었습니다.
+
+```javascript
+body {
+  &.dark {
+    --defaultBg : black;
+    --defaultColor : white;
+  }
+  &.light {
+    --defaultBg : white;
+    --defaultColor : black;
+  }
+}
+```
+
+
+
+## 느낀점
+
+![](./images/dark.png)
+
+다크모드를 구현하면서 느낌점은 결국 낭비한 시간이 너무 길었다는 것입니다. 원인 분석도 제대로 하지 않은 채 상관도 없는 문서를 이리저리 찾아보고 다녔으니 당연한 결과입니다. 문제가 발생하였을 때 가장 먼저 해야하는 일은 그 문제와 기술에 대해서 제대로 이해했는지 생각해보는 것입니다. 저는 Gatsby의 동작과정을 면밀히 살펴보지 않았고 React도 사용할 줄만 알지 제대로 알지 못했습니다. 게을렀던 저를 탓하고 굉장히 반성하고 있습니다.
+
+물론 어떤 기술을 사용하기 위해서 꼭 기술을 완벽하게 파악해야 한다고 말하는 것은 아닙니다. 실제로 사용해보지 않고서는 와닿지 않는 부분이 대부분이기도 하고 가장 좋은 학습 방법이 일단 부딧혀보는 것이라고 생각하기 때문일 것입니다. 하지만 문제가 발생했다고해서 기술을 이해해보려 하기도 전에 무작정 구글에 검색해보는 것은 좋지 않은 습관이라는 것을 깨달았습니다. 그리고 역시 공식문서가 가장 좋은 교재인 것 같습니다..
+
+
+<hr />
+
+## Source
+[Mozilla - CSS custom property](https://developer.mozilla.org/ko/docs/Web/CSS/Using_CSS_custom_properties)
+
+[Gatsby - Overview of the Gatsby Build Process](https://www.gatsbyjs.com/docs/conceptual/overview-of-the-gatsby-build-process/)
+
+[Gatsby - Understanding React Hydration](https://www.gatsbyjs.com/docs/conceptual/react-hydration/)
+
+[How Browsers Work](https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/)
