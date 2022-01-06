@@ -87,10 +87,11 @@ const MarkdownStyle = styled.div`
 
   // Adjust Link Element Style
   a {
-    color: #4263eb;
+    background: linear-gradient(to top, var(--link) 30%, transparent 30%);
+    font-weight: 500;
 
     &:hover {
-      border-bottom: 1px solid #4263eb;
+      opacity: 0.8;
     }
   }
 
