@@ -1,12 +1,12 @@
-import React, { FunctionComponent } from 'react'
-import styled from '@emotion/styled'
+import React, { FunctionComponent } from 'react';
+import styled from '@emotion/styled';
 
 type IconProps = {
-  iconURL: string
-  alter: string
-  className?: string
-  onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined
-}
+  iconURL: string;
+  alter: string;
+  className?: string;
+  onToggleClick?: React.MouseEventHandler<HTMLImageElement> | undefined;
+};
 
 const IconImage = styled.img`
   width: 20px;
@@ -28,7 +28,7 @@ const IconImage = styled.img`
   @media (max-width: 768px) {
     width: 16px;
   }
-`
+`;
 
 const IconWrapper = styled.div`
   display: flex;
@@ -41,19 +41,14 @@ const IconWrapper = styled.div`
       display: flex;
     }
   }
-`
+`;
 
-const Icon: FunctionComponent<IconProps> = ({
-  iconURL,
-  alter,
-  onToggleClick,
-  className,
-}) => {
+const Icon: FunctionComponent<IconProps> = ({ iconURL, alter, onToggleClick, className }) => {
   return (
     <IconWrapper onClick={onToggleClick} className={className}>
       <IconImage src={iconURL} alt={alter} className={className} />
     </IconWrapper>
-  )
-}
+  );
+};
 
-export default Icon
+export default Icon;

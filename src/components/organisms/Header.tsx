@@ -1,21 +1,21 @@
-import React, { FunctionComponent, useState } from 'react'
-import styled from '@emotion/styled'
+import React, { FunctionComponent, useState } from 'react';
+import styled from '@emotion/styled';
 
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby';
 
-import Logo from 'components/atoms/Logo'
-import Icon from 'components/atoms/Icon'
-import MobileMenu from './MobileMenu'
-import MenuItems from 'components/molecules/MenuItems'
+import Logo from 'components/atoms/Logo';
+import Icon from 'components/atoms/Icon';
+import Modal from './Modal';
+import Nav from 'components/molecules/Nav';
 
 type HeaderStaticQueryType = {
   hamburger: {
-    publicURL: string
-  }
+    publicURL: string;
+  };
   logo: {
-    publicURL: string
-  }
-}
+    publicURL: string;
+  };
+};
 
 const HeaderWrapper = styled.header`
   position: fixed;
@@ -35,7 +35,7 @@ const HeaderWrapper = styled.header`
     font-size: 13px;
     height: 60px;
   }
-`
+`;
 
 const HeaderInner = styled.div`
   display: flex;
@@ -46,7 +46,7 @@ const HeaderInner = styled.div`
   max-width: 1044px;
   padding: 20px;
   margin: 0 auto;
-`
+`;
 
 const Header: FunctionComponent = () => {
   const data = useStaticQuery<HeaderStaticQueryType>(graphql`
@@ -58,30 +58,28 @@ const Header: FunctionComponent = () => {
         publicURL
       }
     }
-  `)
+  `);
 
-  const { publicURL: logoURL } = data.logo
-  const { publicURL: hamburgerURL } = data.hamburger
+  const { publicURL: logoURL } = data.logo;
+  const { publicURL: hamburgerURL } = data.hamburger;
 
-  const [modalToggle, setModalToggle] = useState<boolean>(false)
+  const [modalToggle, setModalToggle] = useState<boolean>(false);
 
   return (
     <HeaderWrapper>
       <HeaderInner>
-        <Logo logoURL={logoURL} alter="jeon.dev logo" />
-        <MenuItems />
+        <Logo logoURL={logoURL} alter='jeon.dev logo' />
+        <Nav />
         <Icon
-          className="mobile-menu"
+          className='mobile-menu'
           iconURL={hamburgerURL}
-          alter="menu"
-          onToggleClick={() => setModalToggle(prev => !prev)}
+          alter='menu'
+          onToggleClick={() => setModalToggle((prev) => !prev)}
         />
       </HeaderInner>
-      {modalToggle ? (
-        <MobileMenu onToggleClick={() => setModalToggle(prev => !prev)} />
-      ) : null}
+      {modalToggle ? <Modal onToggleClick={() => setModalToggle((prev) => !prev)} /> : null}
     </HeaderWrapper>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
