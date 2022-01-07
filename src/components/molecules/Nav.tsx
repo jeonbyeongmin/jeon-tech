@@ -8,7 +8,7 @@ type NavProps = {
   className?: string;
 };
 
-const NavWrapper = styled.div`
+const NavWrapper = styled.nav`
   display: flex;
   flex-direction: row;
   align-items: center;

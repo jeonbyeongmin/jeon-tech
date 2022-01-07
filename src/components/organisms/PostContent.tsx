@@ -6,7 +6,7 @@ type PostContentProps = {
   body: string;
 };
 
-const MarkdownStyle = styled.div`
+const PostContentWrapper = styled.article`
   // Renderer Style
   display: flex;
   flex-direction: column;
@@ -539,11 +539,9 @@ const MarkdownStyle = styled.div`
 
 const PostContent: FunctionComponent<PostContentProps> = ({ body }) => {
   return (
-    <article itemScope itemType='http://schema.org/Article'>
-      <MarkdownStyle>
-        <MDXRenderer>{body}</MDXRenderer>
-      </MarkdownStyle>
-    </article>
+    <PostContentWrapper>
+      <MDXRenderer>{body}</MDXRenderer>
+    </PostContentWrapper>
   );
 };
 

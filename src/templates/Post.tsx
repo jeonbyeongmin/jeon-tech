@@ -1,27 +1,27 @@
-import React, { FunctionComponent } from 'react'
-import { graphql } from 'gatsby'
+import React, { FunctionComponent } from 'react';
+import { graphql } from 'gatsby';
 
-import { PostFrontmatterType } from 'types/PostItem.types'
+import { PostFrontmatterType } from 'types/PostItem.types';
 
-import Layout from './Layout'
-import PostContent from 'components/organisms/PostContent'
-import PostHeader from 'components/organisms/PostHeader'
+import Layout from './Layout';
+import PostContent from 'components/organisms/PostContent';
+import PostHeader from 'components/organisms/PostHeader';
 
 export type PostPageItemType = {
-  body: string
-  frontmatter: PostFrontmatterType
-}
+  body: string;
+  frontmatter: PostFrontmatterType;
+};
 
 type PostProps = {
   data: {
     allMdx: {
-      nodes: PostPageItemType[]
-    }
-  }
+      nodes: PostPageItemType[];
+    };
+  };
   location: {
-    href: string
-  }
-}
+    href: string;
+  };
+};
 
 const PostTemplate: FunctionComponent<PostProps> = ({
   data: {
@@ -41,22 +41,17 @@ const PostTemplate: FunctionComponent<PostProps> = ({
       },
     },
     body,
-  } = nodes[0]
+  } = nodes[0];
 
   return (
     <Layout title={title} description={summary} url={href} image={publicURL}>
-      <PostHeader
-        title={title}
-        date={date}
-        categories={categories}
-        thumbnail={gatsbyImageData}
-      />
+      <PostHeader title={title} date={date} categories={categories} thumbnail={gatsbyImageData} />
       <PostContent body={body} />
     </Layout>
-  )
-}
+  );
+};
 
-export default PostTemplate
+export default PostTemplate;
 
 export const queryMarkdownDataBySlug = graphql`
   query queryMarkdownDataBySlug($slug: String) {
@@ -78,4 +73,4 @@ export const queryMarkdownDataBySlug = graphql`
       }
     }
   }
-`
+`;
