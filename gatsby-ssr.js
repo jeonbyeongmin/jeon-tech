@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const onRenderBody = ({ setPreBodyComponents }) => {
   setPreBodyComponents([
@@ -33,5 +33,5 @@ export const onRenderBody = ({ setPreBodyComponents }) => {
         `,
       },
     }),
-  ])
-}
+  ]);
+};
