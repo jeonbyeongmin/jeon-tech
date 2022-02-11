@@ -21,6 +21,7 @@ const defaultStyle = css`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    background-color: var(--defaultBg);
 
     &.dark {
       --defaultBg: #000000;
