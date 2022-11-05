@@ -1,7 +1,7 @@
-import React, { FunctionComponent } from 'react'
-import styled from '@emotion/styled'
-import { Link } from 'gatsby'
-import GlobalStyle from '../../GlobalStyle'
+import React, { FunctionComponent } from 'react';
+import styled from '@emotion/styled';
+import { Link } from 'gatsby';
+import GlobalStyle from '../../GlobalStyle';
 
 const NotFoundPageWrapper = styled.div`
   display: flex;
@@ -9,7 +9,7 @@ const NotFoundPageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
-`
+`;
 
 const NotFoundText = styled.div`
   font-size: 150px;
@@ -18,7 +18,7 @@ const NotFoundText = styled.div`
   @media (max-width: 768px) {
     font-size: 100px;
   }
-`
+`;
 
 const NotFoundDescription = styled.div`
   font-size: 25px;
@@ -28,7 +28,7 @@ const NotFoundDescription = styled.div`
   @media (max-width: 768px) {
     font-size: 20px;
   }
-`
+`;
 
 const GoToMainButton = styled(Link)`
   margin-top: 30px;
@@ -38,20 +38,21 @@ const GoToMainButton = styled(Link)`
   &:hover {
     text-decoration: underline;
   }
-`
+`;
 
 const NotFoundPage: FunctionComponent = () => {
   return (
     <NotFoundPageWrapper>
       <GlobalStyle />
+
       <NotFoundText>404</NotFoundText>
       <NotFoundDescription>
         찾을 수 없는 페이지입니다. <br />
         다른 콘텐츠를 보러 가보시겠어요?
       </NotFoundDescription>
-      <GoToMainButton to="/">메인으로</GoToMainButton>
+      <GoToMainButton to='/'>메인으로</GoToMainButton>
     </NotFoundPageWrapper>
-  )
-}
+  );
+};
 
-export default NotFoundPage
+export default NotFoundPage;

@@ -64,7 +64,7 @@ const SocialIcons: FunctionComponent = () => {
         >
           <Icon className='social-icon' iconURL={githubImgURL} alter='github icon' />
         </a>
-        <a href='mailto:prob.dev.2022@gmail.com' aria-label='mail'>
+        <a href='mailto:qudals7613@gmail.com' aria-label='mail'>
           <Icon className='social-icon' iconURL={emailImgURL} alter='email icon' />
         </a>
       </SocialIconsGrid>
